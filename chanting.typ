@@ -49,8 +49,10 @@
 #let char-pinyin-note-vertical(c, p, n) = box(width: 1em)[ // increased box width so notes don't overflow
   #set align(left) // FoRCE left alignment so the 2em character column NEVER shifts
   #let top-pad = if n.contains("^") { 0pt } else { 6pt }
-  #let has_left_line = n.contains("|")
-  #let n_rest = n.replace("|", "")
+  #let has_left_line = n.contains("|") or n.contains("!")
+  #let is_line_end = n.contains("!")
+  #let line_len = if is_line_end { 20pt } else { 34pt }
+  #let n_rest = n.replace("|", "").replace("!", "")
   #grid(
     columns: (2em, auto),
     rows: (20pt, 14pt),
@@ -58,7 +60,7 @@
     // Row 1: Character (col 1), Note (col 2)
     box(width: 2em, height: 20pt)[
       #if has_left_line {
-        place(left + top, line(angle: 90deg, length: 34pt, stroke: 1pt + rgb("999999")))
+        place(left + top, line(angle: 90deg, length: line_len, stroke: 1.5pt + rgb("999999")))
       }
       #place(center + horizon, text(16pt, font: "AR PL New Kai", c))
     ],
@@ -106,7 +108,7 @@
 #sutra-block(
   vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: ". @.. ^- oo T"),
   vline("　", py: " ", notes: " "), // Spacer
-  vline("普陀山", py: "pǔ tuó shān", notes: "| |  "),
+  vline("普陀山", py: "pǔ tuó shān", notes: "| | !"),
   vline("　", py: " ", notes: " "), // Spacer
   vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
