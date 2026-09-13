@@ -64,7 +64,7 @@
     ],
     if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
-    text(9pt, fill: rgb("666"), p),
+    move(dy: -4pt, text(9pt, fill: rgb("666"), p)),
     []
   )
 ]
