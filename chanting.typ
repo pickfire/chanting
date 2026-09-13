@@ -11,7 +11,7 @@
       place(center + horizon, circle(radius: 1.5pt, stroke: 1.2pt + rgb("1E88E5"))) // Blue
     } else if n == "◎" or n == "@" {
       box(width: 6pt, height: 6pt)[
-        #place(center + horizon, circle(radius: 2.5pt, stroke: 1pt + rgb("1E88E5"))) // Blue
+        #place(center + horizon, circle(radius: 2pt, stroke: 1pt + rgb("1E88E5"))) // Blue
         #place(center + horizon, circle(radius: 1pt, fill: rgb("1E88E5"))) // Blue
       ]
     } else if n == "△" or n == "^" {
@@ -21,8 +21,8 @@
         stroke: 1.2pt + rgb("E53935"), // Red
         (0pt, 0pt), (6pt, 0pt), (0pt, 6pt)
       ))
-    } else if n == "○" or n == "o" or n == "o" {
-      place(center + horizon, circle(radius: 2.5pt, stroke: 1pt + rgb("1E88E5"))) // Blue
+    } else if n == "○" or n == "O" or n == "o" {
+      place(center + horizon, circle(radius: 2pt, stroke: 1pt + rgb("1E88E5"))) // Blue
     } else if n == "⊥" or n == "T" {
       box(width: 6pt, height: 6pt)[
         #place(line(start: (3pt, 0pt), end: (3pt, 6pt), stroke: 1.2pt + rgb("E53935"))) // Red
@@ -30,7 +30,7 @@
       ]
     } else if n == "-" {
       // Horizontal dash - centered vertically using place!
-      place(center + horizon, line(length: 8pt, stroke: 1.5pt + rgb("E53935"))) // Red
+      place(center + horizon, line(length: 5pt, stroke: 1.5pt + rgb("E53935"))) // Red
     } else {
       text(12pt, fill: rgb("E53935"), weight: "bold", n)
     }
@@ -46,7 +46,7 @@
   )
 }
 
-#let char-pinyin-note-vertical(c, p, n) = box(width: 4em)[ // increased box width so notes don't overflow
+#let char-pinyin-note-vertical(c, p, n) = box(width: 1em)[ // increased box width so notes don't overflow
   #set align(left) // FoRCE left alignment so the 2em character column NEVER shifts
   #let top-pad = if n.contains("^") { 0pt } else { 6pt }
   #let has_left_line = n.contains("|")
@@ -58,7 +58,7 @@
     // Row 1: Character (col 1), Note (col 2)
     box(width: 2em, height: 20pt)[
       #if has_left_line {
-        place(left + top, line(angle: 90deg, length: 34pt, stroke: 1.5pt + rgb("999999")))
+        place(left + top, line(angle: 90deg, length: 34pt, stroke: 1pt + rgb("999999")))
       }
       #place(center + horizon, text(16pt, font: "AR PL New Kai", c))
     ],
