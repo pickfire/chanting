@@ -108,7 +108,7 @@
 #sutra-block(
   vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: ". @.. ^- oo T"),
   vline("　", py: " ", notes: " "), // Spacer
-  vline("普陀山", py: "pǔ tuó shān", notes: "| | !"),
+  vline("普陀山", py: "pǔ tuó shān", notes: "| !  "),
   vline("　", py: " ", notes: " "), // Spacer
   vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
