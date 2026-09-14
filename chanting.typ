@@ -68,7 +68,7 @@
   )
 ]
 
-#let vline(cn, py: "", notes: "") = {
+#let vline(cn, py: "", notes: "", subscript: "") = {
   let c_arr = cn.clusters()
   let p_arr = if py != "" { py.split(" ") } else { () }
   
@@ -96,7 +96,21 @@
     cells.push(char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar))
   }
   
-  box(stack(dir: ttb, spacing: 0pt, ..cells))
+  let col = stack(dir: ttb, spacing: 0pt, ..cells)
+  if subscript != "" {
+    let sub_chars = subscript.clusters()
+    let sub_stack = stack(dir: ttb, spacing: 2pt, ..sub_chars.map(c => {
+      let t = text(12pt, font: "AR PL New Kai", fill: rgb("333"), c)
+      if c == "（" or c == "）" or c == "(" or c == ")" {
+        rotate(90deg, t)
+      } else {
+        t
+      }
+    }))
+    let sub_box = box(width: 1em, height: 68pt, align(center + horizon, sub_stack))
+    col = stack(dir: ttb, spacing: 0pt, col, sub_box)
+  }
+  box(col)
 }
 
 #let sutra-block(..lines) = {
@@ -129,7 +143,7 @@
 // --- DoCUMENT CoNTENT ---
 
 #sutra-block(
-  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "  o  o o o oo o"),
+  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "  o  o o o oo o", subscript: "（三称）"),
   vline("开经偈", py: "kāi jīng jì"),
   vline("无上甚深微妙法", py: "wú shàng shén shēn wéi miào fǎ", notes: "oo  o o o o^ o"),
   vline("百千万劫难遭遇", py: "bǎi qiān wàn jié nàn zāo yù", notes: "oo  o o o oo o"),
