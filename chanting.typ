@@ -52,13 +52,12 @@
   )
 }
 
-#let char-pinyin-note-vertical(c, p, n) = box(width: 1em)[ // increased box width so notes don't overflow
+#let char-pinyin-note-vertical(c, p, n, is_last_bar: false) = box(width: 1em)[ // increased box width so notes don't overflow
   #set align(left) // FoRCE left alignment so the 2em character column NEVER shifts
   #let top-pad = if n.contains("^") { 0pt } else { 6pt }
-  #let has_left_line = n.contains("|") or n.contains("!")
-  #let is_line_end = n.contains("!")
-  #let line_len = if is_line_end { 28pt } else { 34pt }
-  #let n_rest = n.replace("|", "").replace("!", "")
+  #let has_left_line = n.contains("|")
+  #let line_len = if is_last_bar { 28pt } else { 34pt }
+  #let n_rest = n.replace("|", "")
   #grid(
     columns: (2em, auto),
     rows: (20pt, 14pt),
@@ -94,7 +93,15 @@
     if n == " " or n == "　" { n = "" }
     if c == " " or c == "" { c = "　" }
     
-    cells.push(char-pinyin-note-vertical(c, p, n))
+    let is_last_bar = false
+    if n.contains("|") {
+      let next_n = n_arr.at(i + 1, default: "")
+      if not next_n.contains("|") {
+        is_last_bar = true
+      }
+    }
+    
+    cells.push(char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar))
   }
   
   box(stack(dir: ttb, spacing: 0pt, ..cells))
@@ -112,9 +119,9 @@
 
 // --- DEMo oF ALL SYMBoLS ---
 #sutra-block(
-  vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: ". @.. ^- oo T x"),
+  vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: ". @.. ^- oo T"),
   vline("　", py: " ", notes: " "), // Spacer
-  vline("普陀山", py: "pǔ tuó shān", notes: "| !  "),
+  vline("普陀山", py: "pǔ tuó shān", notes: "| |  "),
   vline("　", py: " ", notes: " "), // Spacer
   vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
@@ -136,7 +143,7 @@
   vline("百千万劫难遭遇", py: "bǎi qiān wàn jié nàn zāo yù", notes: "o.  . . . o. o"),
   vline("我今见闻得受持", py: "wǒ jīn jiàn wén dé shòu chí", notes: "o.  . . . o. o"),
   vline("愿解如来真实义", py: "yuàn jiě rú lái zhēn shí yì", notes: "o.  . . . o. o"),
-  vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "x . . . . . o x"),
+  vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "_ . . . . . o _"),
   vline("观自在菩萨", py: "guān zì zài pú sà", notes: "o . . . o"),
   vline("行深般若波罗蜜多时", py: "xíng shēn bō rě bō luó mì duō shí", notes: "o . . . . . . . o"),
   vline("照见五蕴皆空度⼀切苦厄", py: "zhào jiàn wǔ yùn jiē kōng dù yī qiē kǔ è", notes: "o . . . . o o . . . o"),
@@ -186,9 +193,9 @@
   vline("“揭谛揭谛波罗揭谛", py: "jiē dì jiē dì bō luó jiē dì", notes: " o . . o o . . o"),
   vline("波罗僧揭谛菩提萨婆诃”", py: "bō luó sēng jiē dì pú tí sà pó hē", notes: "o . . . o o . . . o "),
   vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。"),
-  vline("普陀⼭琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "x . . . . . o"),
+  vline("普陀⼭琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "_ . . . . . o"),
   vline("大慈大悲观世⾳菩萨", py: "dà cí dà bēi guān shì yīn pú sà", notes: "o . . . o . . . o"),
-  vline("南无观世⾳菩萨", py: "ná mó guān shì yīn pú sà", notes: "x . . . . . o"),
+  vline("南无观世⾳菩萨", py: "ná mó guān shì yīn pú sà", notes: "_ . . . . . o"),
   vline("转念四字", py: ""),
   vline("观⾳菩萨", py: "guān yīn pú sà"),
   vline("普贤十大愿", py: "pǔ xián shí dà yuàn"),
