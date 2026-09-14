@@ -11,7 +11,7 @@
       place(center + horizon, circle(radius: 1.5pt, stroke: 0.8pt + rgb("1E88E5"))) // Blue
     } else if n == "◎" or n == "@" {
       box(width: 6pt, height: 6pt)[
-        #place(center + horizon, circle(radius: 2pt, stroke: 1pt + rgb("1E88E5"))) // Blue
+        #place(center + horizon, circle(radius: 2pt, stroke: 0.8pt + rgb("1E88E5"))) // Blue
         #place(center + horizon, circle(radius: 1pt, fill: rgb("1E88E5"))) // Blue
       ]
     } else if n == "△" or n == "^" {
@@ -111,7 +111,7 @@
 
 // --- DEMo oF ALL SYMBoLS ---
 #sutra-block(
-  vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: "o @ ^ o- oo T"),
+  vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: "o @ ^o o- oo T"),
   vline("　", py: " ", notes: " "), // Spacer
   vline("普陀山", py: "pǔ tuó shān", notes: "| |  "),
   vline("　", py: " ", notes: " "), // Spacer
