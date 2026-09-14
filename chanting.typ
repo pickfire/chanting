@@ -18,17 +18,17 @@
       // Right triangle rotated 90 degrees
       place(center + top, polygon(
         fill: none,
-        stroke: 1.2pt + rgb("E53935"), // Red
+        stroke: 0.8pt + rgb("E53935"), // Red
         (0pt, 0pt), (6pt, 0pt), (0pt, 6pt)
       ))
     } else if n == "⊥" or n == "T" {
       box(width: 6pt, height: 6pt)[
-        #place(line(start: (3pt, 0pt), end: (3pt, 6pt), stroke: 1.2pt + rgb("E53935"))) // Red
-        #place(line(start: (0pt, 6pt), end: (6pt, 6pt), stroke: 1.2pt + rgb("E53935"))) // Red
+        #place(line(start: (3pt, 0pt), end: (3pt, 6pt), stroke: 0.8pt + rgb("E53935"))) // Red
+        #place(line(start: (0pt, 6pt), end: (6pt, 6pt), stroke: 0.8pt + rgb("E53935"))) // Red
       ]
     } else if n == "-" {
       // Horizontal dash - centered vertically using place!
-      place(center + horizon, line(length: 5pt, stroke: 1.5pt + rgb("E53935"))) // Red
+      place(center + horizon, line(length: 5pt, stroke: 0.8pt + rgb("E53935"))) // Red
     } else {
       text(12pt, fill: rgb("E53935"), weight: "bold", n)
     }
