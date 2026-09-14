@@ -8,7 +8,7 @@
   // Fixed size box for all symbols so they align identically
   box(width: 8pt, height: 8pt, align(center + horizon)[
     #if n == "o" or n == "O" or n == "○" or n == "。" {
-      place(center + horizon, circle(radius: 1.5pt, stroke: 1.2pt + rgb("1E88E5"))) // Blue
+      place(center + horizon, circle(radius: 1.5pt, stroke: 0.8pt + rgb("1E88E5"))) // Blue
     } else if n == "◎" or n == "@" {
       box(width: 6pt, height: 6pt)[
         #place(center + horizon, circle(radius: 2pt, stroke: 1pt + rgb("1E88E5"))) // Blue
