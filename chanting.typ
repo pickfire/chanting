@@ -111,7 +111,7 @@
 
 // --- DEMo oF ALL SYMBoLS ---
 #sutra-block(
-  vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: "o @oo ^- oo T"),
+  vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: "o @ ^ o- oo T"),
   vline("　", py: " ", notes: " "), // Spacer
   vline("普陀山", py: "pǔ tuó shān", notes: "| |  "),
   vline("　", py: " ", notes: " "), // Spacer
