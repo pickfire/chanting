@@ -11,8 +11,8 @@
       place(center + horizon, circle(radius: 1.5pt, stroke: 0.8pt + rgb("1E88E5"))) // Blue
     } else if n == "◎" or n == "@" {
       box(width: 6pt, height: 6pt)[
-        #place(center + horizon, circle(radius: 2pt, stroke: 0.8pt + rgb("1E88E5"))) // Blue
-        #place(center + horizon, circle(radius: 1pt, fill: rgb("1E88E5"))) // Blue
+        #place(center + horizon, circle(radius: 2.5pt, stroke: 0.8pt + rgb("1E88E5"))) // Blue
+        #place(center + horizon, circle(radius: 0.6pt, fill: rgb("1E88E5"))) // Blue
       ]
     } else if n == "△" or n == "^" {
       // Right triangle rotated 90 degrees
