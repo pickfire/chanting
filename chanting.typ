@@ -60,7 +60,10 @@
       #if has_left_line {
         place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
       }
-      #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: if bold { "bold" } else { "regular" }, c))
+      #if bold {
+        place(center + horizon, rect(width: 10.8pt, height: 10.8pt, fill: black, radius: 2pt))
+      }
+      #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: if bold { "bold" } else { "regular" }, fill: if bold { white } else { black }, c))
     ],
     if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
