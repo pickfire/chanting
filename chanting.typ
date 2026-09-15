@@ -111,7 +111,11 @@
     let sub_box = box(width: 13.2pt, height: 40.8pt, align(center + horizon, sub_stack))
     col = stack(dir: ttb, spacing: 0pt, col, sub_box)
   }
-  box(col)
+  if bold {
+    box(rect(fill: black, inset: (x: 0pt, y: 2pt), radius: 2pt, col))
+  } else {
+    box(col)
+  }
 }
 
 #let sutra-block(..lines) = {
