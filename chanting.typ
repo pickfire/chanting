@@ -126,10 +126,6 @@
 
 // --- TOP SECTION ---
 #sutra-block(
-  vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: "o @ ^o o- oo T"),
-  vline("　", py: " ", notes: " "),
-  vline("普陀山", py: "pǔ tuó shān", notes: "| |  "),
-  vline("　", py: " ", notes: " "),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "o _ o o o o o o oo", subscript: "（三称）"),
   vline("开经偈", py: "kāi jīng jì"),
   vline("无上甚深微妙法", py: "wú shàng shén shēn wéi miào fǎ", notes: "o _ o o o o oo"),
@@ -166,11 +162,6 @@
   vline("是大神咒是大明咒", py: "shì dà shén zhòu shì dà míng zhòu", notes: "_ _ _ oo _ _ _ oo"),
   vline("是无上咒是无等等咒", py: "shì wú shàng zhòu shì wú děng děng zhòu", notes: "_ _ _ oo _ _ _ _ _ oo"),
   vline("能除⼀切苦真实不虚", py: "néng chú yī qiē kǔ zhēn shí bù xū", notes: "_ _ _ _ oo _ _ _ oo"),
-)
-
-// --- BOTTOM SECTION ---
-#v(4cm)
-#sutra-block(
   vline("故说般若波罗蜜多咒", py: "gù shuō bō rě bō luó mì duō zhòu", notes: ""),
   vline("即说咒⽈", py: "jí shuō zhòu yuē", notes: ""),
   vline("“揭谛揭谛波罗揭谛", py: "jiē dì jiē dì bō luó jiē dì", notes: "_ o _ o _ o _ o"),
@@ -178,8 +169,19 @@
   vline("普陀⼭琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "_ o o o o o o"),
   vline("大慈大悲观世⾳菩萨", py: "dà cí dà bēi guān shì yīn pú sà", notes: "o o o o o o o o o"),
   vline("南无观世⾳菩萨", py: "ná mó guān shì yīn pú sà", notes: "_ o o o o o o"),
-  vline("转念四字", py: ""),
-  vline("观⾳菩萨", py: "guān yīn pú sà"),
+  vline("转念四字", py: "")
+)
+
+// --- BOTTOM SECTION ---
+#v(4cm)
+#sutra-block(
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o-  o- o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
   vline("普贤十大愿", py: "pǔ xián shí dà yuàn"),
   vline("⼀者礼敬诸佛", py: "yī zhě lǐ jìng zhū fó", notes: "_ _ _ _ _ oo"),
   vline("二者称赞如来", py: "èr zhě chēng zàn rú lái", notes: "_ _ _ _ _ oo"),
