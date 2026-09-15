@@ -26,7 +26,7 @@
         #place(line(start: (1.8pt, 0pt), end: (1.8pt, 3.6pt), stroke: 0.5pt + rgb("E53935"))) // Red
         #place(line(start: (0pt, 3.6pt), end: (3.6pt, 3.6pt), stroke: 0.5pt + rgb("E53935"))) // Red
       ]
-    } else if n == "-" {
+    } else if n == "_" or n == " " or n == "" { none } else if n == "-" {
       // Horizontal dash - centered vertically using place!
       place(center + horizon, line(length: 3pt, stroke: 0.5pt + rgb("E53935"))) // Red
     } else {
