@@ -1,7 +1,7 @@
 #set page(
   paper: "a3",
   flipped: true, 
-  margin: 1cm,
+  margin: 2cm,
 )
 
 #let draw-single-note(n) = {
