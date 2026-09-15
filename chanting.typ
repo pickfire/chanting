@@ -44,7 +44,7 @@
   )
 }
 
-#let char-pinyin-note-vertical(c, p, n, is_last_bar: false) = box(width: 1em)[ // increased box width so notes don't overflow
+#let char-pinyin-note-vertical(c, p, n, is_last_bar: false, bold: false) = box(width: 1em)[ // increased box width so notes don't overflow
   #set align(left) // FoRCE left alignment so the 2em character column NEVER shifts
   #let n_rest_temp = n.replace("|", "")
   #let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 6.9pt } else { 3.6pt }
@@ -60,7 +60,7 @@
       #if has_left_line {
         place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
       }
-      #place(center + horizon, text(9.6pt, font: "AR PL New Kai", c))
+      #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: if bold { "bold" } else { "regular" }, c))
     ],
     if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
@@ -69,7 +69,7 @@
   )
 ]
 
-#let vline(cn, py: "", notes: "", subscript: "") = {
+#let vline(cn, py: "", notes: "", subscript: "", bold: false) = {
   let c_arr = cn.clusters()
   let p_arr = if py != "" { py.split(" ") } else { () }
   
@@ -94,7 +94,7 @@
       }
     }
     
-    cells.push(char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar))
+    cells.push(char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar, bold: bold))
   }
   
   let col = stack(dir: ttb, spacing: 0pt, ..cells)
@@ -129,7 +129,7 @@
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o oo"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ _ o o o o o o"),
-  vline("开经偈", py: "kāi jīng jì"),
+  vline("开经偈", py: "", bold: true),
   vline("无上甚深微妙法", py: "wú shàng shén shēn wéi miào fǎ", notes: "o _ o o o o oo"),
   vline("百千万劫难遭遇", py: "bǎi qiān wàn jié nàn zāo yù", notes: "o o o o o o o"),
   vline("我今见闻得受持", py: "wǒ jīn jiàn wén dé shòu chí", notes: "o o o o o o oo"),
