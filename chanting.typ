@@ -52,11 +52,11 @@
   #let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
   #let n_rest = n.replace("|", "")
   #grid(
-    columns: (2em, auto),
+    columns: (13.2pt, auto),
     rows: (12pt, 8.4pt),
     align: (center + horizon, left + top),
     // Row 1: Character (col 1), Note (col 2)
-    box(width: 2em, height: 12pt)[
+    box(width: 13.2pt, height: 12pt)[
       #if has_left_line {
         place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
       }
@@ -118,7 +118,7 @@
   align(top + right)[
     #stack(
       dir: rtl,
-      spacing: 0.8em,
+      spacing: 14pt,
       ..lines
     )
   ]
@@ -130,14 +130,6 @@
   vline("　", py: " ", notes: " "),
   vline("普陀山", py: "pǔ tuó shān", notes: "| |  "),
   vline("　", py: " ", notes: " "),
-  vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o-  o- o"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "  o  o o o oo o", subscript: "（三称）"),
   vline("开经偈", py: "kāi jīng jì"),
   vline("无上甚深微妙法", py: "wú shàng shén shēn wéi miào fǎ", notes: "oo  o o o o^ o"),
@@ -175,16 +167,16 @@
   vline("三世诸佛依般若波罗蜜多故", py: "sān shì zhū fó yī bō rě bō luó mì duō gù", notes: "o o o o o o o o o o o o"),
   vline("得阿耨多罗三藐三菩提", py: "dé ā nuò duō luó sān miǎo sān pú tí", notes: "o o o o o o o o o o"),
   vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。"),
-  vline("故知般若波罗蜜多", py: "gù zhī bō rě bō luó mì duō", notes: "o o o o o o o o")
+  vline("故知般若波罗蜜多", py: "gù zhī bō rě bō luó mì duō", notes: "o o o o o o o o"),
+  vline("是大神咒是大明咒", py: "shì dà shén zhòu shì dà míng zhòu", notes: "o o o o o o o o"),
+  vline("是无上咒是无等等咒", py: "shì wú shàng zhòu shì wú děng děng zhòu", notes: "o o o o o o o o o"),
+  vline("能除⼀切苦真实不虚", py: "néng chú yī qiē kǔ zhēn shí bù xū", notes: "o o o o o o o o o"),
+  vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。")
 )
 
 // --- BOTTOM SECTION ---
 #v(4cm)
 #sutra-block(
-  vline("是大神咒是大明咒", py: "shì dà shén zhòu shì dà míng zhòu", notes: "o o o o o o o o"),
-  vline("是无上咒是无等等咒", py: "shì wú shàng zhòu shì wú děng děng zhòu", notes: "o o o o o o o o o"),
-  vline("能除⼀切苦真实不虚", py: "néng chú yī qiē kǔ zhēn shí bù xū", notes: "o o o o o o o o o"),
-  vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。"),
   vline("故说般若波罗蜜多咒", py: "gù shuō bō rě bō luó mì duō zhòu", notes: "o o o o o o o o o"),
   vline("即说咒⽈", py: "jí shuō zhòu yuē", notes: "o o o o"),
   vline("“揭谛揭谛波罗揭谛", py: "jiē dì jiē dì bō luó jiē dì", notes: " o o o o o o o o"),
