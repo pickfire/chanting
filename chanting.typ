@@ -19,7 +19,7 @@
       place(center + top, polygon(
         fill: none,
         stroke: 0.5pt + rgb("E53935"), // Red
-        (0pt, 0pt), (0pt, 3.6pt), (3.6pt, 3.6pt)
+        (0pt, 0pt), (3.6pt, 0pt), (3.6pt, 3.6pt)
       ))
     } else if n == "⊥" or n == "T" {
       box(width: 3.6pt, height: 3.6pt)[
