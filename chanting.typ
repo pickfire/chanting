@@ -19,7 +19,7 @@
       place(center + top, polygon(
         fill: none,
         stroke: 0.5pt + rgb("E53935"), // Red
-        (0pt, 0pt), (3.6pt, 0pt), (0pt, 3.6pt)
+        (0pt, 1.8pt), (3.6pt, 0pt), (3.6pt, 3.6pt)
       ))
     } else if n == "⊥" or n == "T" {
       box(width: 3.6pt, height: 3.6pt)[
@@ -174,7 +174,9 @@
 )
 
 // --- BOTTOM SECTION ---
-#v(4cm)
+#v(1.5cm)
+#line(length: 100%, stroke: 0.5pt)
+#v(1.5cm)
 #sutra-block(
   vline("转念四字", py: ""),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- _ - o"),
