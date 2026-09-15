@@ -129,7 +129,7 @@
   vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó  ", notes: "^ _ o o o o o o o o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ _ o o o o o o"),
-  vline("开经偈", py: "", bold: true),
+  vline("【开经偈】", py: "", bold: true),
   vline("无上甚深微妙法", py: "wú shàng shén shēn wéi miào fǎ", notes: "o _ o o o o oo"),
   vline("百千万劫难遭遇", py: "bǎi qiān wàn jié nàn zāo yù", notes: "o o o o o o o"),
   vline("我今见闻得受持", py: "wǒ jīn jiàn wén dé shòu chí", notes: "o o o o o o oo"),
