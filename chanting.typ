@@ -126,7 +126,7 @@
 
 // --- TOP SECTION ---
 #sutra-block(
-  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o oo"),
+  vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó  ", notes: "^ _ o o o o o o o o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ _ o o o o o o"),
   vline("开经偈", py: "", bold: true),
@@ -166,8 +166,8 @@
   vline("能除⼀切苦真实不虚", py: "néng chú yī qiē kǔ zhēn shí bù xū", notes: "_ _ _ _ oo _ _ _ oo"),
   vline("故说般若波罗蜜多咒", py: "gù shuō bō rě bō luó mì duō zhòu", notes: ""),
   vline("即说咒⽈", py: "jí shuō zhòu yuē", notes: ""),
-  vline("“揭谛揭谛波罗揭谛", py: " jiē dì jiē dì bō luó jiē dì", notes: " _ o _ o _ o _ o"),
-  vline("波罗僧揭谛菩提萨婆诃”", py: "bō luó sēng jiē dì pú tí sà pó hē", notes: "_ _ _ _ _ _ _ _ _ oo"),
+  vline("揭谛揭谛波罗揭谛", py: "jiē dì jiē dì bō luó jiē dì", notes: "_ o _ o _ o _ o"),
+  vline("波罗僧揭谛菩提萨婆诃", py: "bō luó sēng jiē dì pú tí sà pó hē", notes: "_ _ _ _ _ _ _ _ _ oo"),
   vline("普陀⼭琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "_ o o o o o o"),
   vline("大慈大悲观世⾳菩萨", py: "dà cí dà bēi guān shì yīn pú sà", notes: "o o o o o o o o o"),
   vline("南无观世⾳菩萨", py: "ná mó guān shì yīn pú sà", notes: "_ o o o o o o")
@@ -177,13 +177,13 @@
 #v(4cm)
 #sutra-block(
   vline("转念四字", py: ""),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o-  o- o"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "- _ - o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "- _ - o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "- _ - o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- _ o- o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- _ o- o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- _ o- o"),
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- _ o- o"),
   vline("普贤十大愿", py: "pǔ xián shí dà yuàn"),
   vline("⼀者礼敬诸佛", py: "yī zhě lǐ jìng zhū fó", notes: "_ _ _ _ _ oo"),
   vline("二者称赞如来", py: "èr zhě chēng zàn rú lái", notes: "_ _ _ _ _ oo"),
