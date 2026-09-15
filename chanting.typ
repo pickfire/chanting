@@ -1,36 +1,36 @@
 #set page(
-  paper: "a4",
+  paper: "a3",
   flipped: true, 
-  margin: 1.5cm,
+  margin: 1cm,
 )
 
 #let draw-single-note(n) = {
   // Fixed size box for all symbols so they align identically
-  box(width: 8pt, height: 8pt, align(center + horizon)[
+  box(width: 4.8pt, height: 4.8pt, align(center + horizon)[
     #if n == "o" or n == "O" or n == "○" or n == "。" {
-      place(center + horizon, circle(radius: 1.5pt, stroke: 0.8pt + rgb("1E88E5"))) // Blue
+      place(center + horizon, circle(radius: 0.9pt, stroke: 0.5pt + rgb("1E88E5"))) // Blue
     } else if n == "◎" or n == "@" {
-      box(width: 6pt, height: 6pt)[
-        #place(center + horizon, circle(radius: 2.5pt, stroke: 0.8pt + rgb("1E88E5"))) // Blue
-        #place(center + horizon, circle(radius: 0.6pt, fill: rgb("1E88E5"))) // Blue
+      box(width: 3.6pt, height: 3.6pt)[
+        #place(center + horizon, circle(radius: 1.5pt, stroke: 0.5pt + rgb("1E88E5"))) // Blue
+        #place(center + horizon, circle(radius: 0.4pt, fill: rgb("1E88E5"))) // Blue
       ]
     } else if n == "△" or n == "^" {
       // Right triangle rotated 90 degrees
       place(center + top, polygon(
         fill: none,
-        stroke: 0.8pt + rgb("E53935"), // Red
-        (0pt, 0pt), (6pt, 0pt), (0pt, 6pt)
+        stroke: 0.5pt + rgb("E53935"), // Red
+        (0pt, 0pt), (3.6pt, 0pt), (0pt, 3.6pt)
       ))
     } else if n == "⊥" or n == "T" {
-      box(width: 6pt, height: 6pt)[
-        #place(line(start: (3pt, 0pt), end: (3pt, 6pt), stroke: 0.8pt + rgb("E53935"))) // Red
-        #place(line(start: (0pt, 6pt), end: (6pt, 6pt), stroke: 0.8pt + rgb("E53935"))) // Red
+      box(width: 3.6pt, height: 3.6pt)[
+        #place(line(start: (1.8pt, 0pt), end: (1.8pt, 3.6pt), stroke: 0.5pt + rgb("E53935"))) // Red
+        #place(line(start: (0pt, 3.6pt), end: (3.6pt, 3.6pt), stroke: 0.5pt + rgb("E53935"))) // Red
       ]
     } else if n == "-" {
       // Horizontal dash - centered vertically using place!
-      place(center + horizon, line(length: 5pt, stroke: 0.8pt + rgb("E53935"))) // Red
+      place(center + horizon, line(length: 3pt, stroke: 0.5pt + rgb("E53935"))) // Red
     } else {
-      text(12pt, fill: rgb("E53935"), weight: "bold", n)
+      text(7.2pt, fill: rgb("E53935"), weight: "bold", n)
     }
   ])
 }
@@ -39,7 +39,7 @@
   let notes = n.clusters()
   stack(
     dir: ttb,
-    spacing: -2.5pt,
+    spacing: -1.5pt,
     ..notes.map(char => draw-single-note(char))
   )
 }
@@ -47,24 +47,24 @@
 #let char-pinyin-note-vertical(c, p, n, is_last_bar: false) = box(width: 1em)[ // increased box width so notes don't overflow
   #set align(left) // FoRCE left alignment so the 2em character column NEVER shifts
   #let n_rest_temp = n.replace("|", "")
-  #let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 11.5pt } else { 6pt }
+  #let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 6.9pt } else { 3.6pt }
   #let has_left_line = n.contains("|")
-  #let line_len = if is_last_bar { 28pt } else { 34pt }
+  #let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
   #let n_rest = n.replace("|", "")
   #grid(
     columns: (2em, auto),
-    rows: (20pt, 14pt),
+    rows: (12pt, 8.4pt),
     align: (center + horizon, left + top),
     // Row 1: Character (col 1), Note (col 2)
-    box(width: 2em, height: 20pt)[
+    box(width: 2em, height: 12pt)[
       #if has_left_line {
-        place(left + top, line(angle: 90deg, length: line_len, stroke: 1.5pt + rgb("999999")))
+        place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
       }
-      #place(center + horizon, text(16pt, font: "AR PL New Kai", c))
+      #place(center + horizon, text(9.6pt, font: "AR PL New Kai", c))
     ],
     if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
-    move(dy: -4pt, text(7.5pt, fill: rgb("666"), p)),
+    move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)),
     []
   )
 ]
@@ -100,15 +100,15 @@
   let col = stack(dir: ttb, spacing: 0pt, ..cells)
   if subscript != "" {
     let sub_chars = subscript.clusters()
-    let sub_stack = stack(dir: ttb, spacing: 2pt, ..sub_chars.map(c => {
-      let t = text(12pt, font: "AR PL New Kai", fill: rgb("333"), c)
+    let sub_stack = stack(dir: ttb, spacing: 1.2pt, ..sub_chars.map(c => {
+      let t = text(7.2pt, font: "AR PL New Kai", fill: rgb("333"), c)
       if c == "（" or c == "）" or c == "(" or c == ")" {
         rotate(90deg, t)
       } else {
         t
       }
     }))
-    let sub_box = box(width: 1em, height: 68pt, align(center + horizon, sub_stack))
+    let sub_box = box(width: 1em, height: 40.8pt, align(center + horizon, sub_stack))
     col = stack(dir: ttb, spacing: 0pt, col, sub_box)
   }
   box(col)
@@ -118,18 +118,18 @@
   align(top + right)[
     #stack(
       dir: rtl,
-      spacing: 2.5em,
+      spacing: 0.8em,
       ..lines
     )
   ]
 }
 
-// --- DEMo oF ALL SYMBoLS ---
+// --- TOP SECTION ---
 #sutra-block(
   vline("法器符号演示", py: "fǎ qì fú hào yǎn shì", notes: "o @ ^o o- oo T"),
-  vline("　", py: " ", notes: " "), // Spacer
+  vline("　", py: " ", notes: " "),
   vline("普陀山", py: "pǔ tuó shān", notes: "| |  "),
-  vline("　", py: " ", notes: " "), // Spacer
+  vline("　", py: " ", notes: " "),
   vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
@@ -137,13 +137,7 @@
   vline("观音菩萨", py: "guān yīn pú sà", notes: "o-  o- o"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o")
-)
-#pagebreak()
-
-// --- DoCUMENT CoNTENT ---
-
-#sutra-block(
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "  o  o o o oo o", subscript: "（三称）"),
   vline("开经偈", py: "kāi jīng jì"),
   vline("无上甚深微妙法", py: "wú shàng shén shēn wéi miào fǎ", notes: "oo  o o o o^ o"),
@@ -157,10 +151,7 @@
   vline("舍利子色不异空", py: "shè lì zǐ sè bù yì kōng", notes: "   。   。"),
   vline("空不异色", py: "kōng bù yì sè", notes: "   。"),
   vline("色即是空", py: "sè jí shì kōng", notes: "   。"),
-  vline("空即是色", py: "kōng jí shì sè", notes: "   。")
-)
-#pagebreak()
-#sutra-block(
+  vline("空即是色", py: "kōng jí shì sè", notes: "   。"),
   vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。"),
   vline("受想行识亦复如是", py: "shòu xiǎng xíng shí yì fù rú shì", notes: "o o o o o o o o"),
   vline("舍利子是诸法空相", py: "shè lì zǐ shì zhū fǎ kōng xiāng", notes: "o o o o o o o o"),
@@ -174,10 +165,7 @@
   vline("无无明亦无无明尽", py: "wú wú míng yì wú wú míng jìn", notes: "o o o o o o o o"),
   vline("乃⾄无老死亦无老死尽", py: "nǎi zhì wú lǎo sǐ yì wú lǎo sǐ jìn", notes: "o o o o o o o o o o"),
   vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。"),
-  vline("无苦集灭道无智亦无得", py: "wú kǔ jí miè dào wú zhì yì wú dé", notes: "o o o o o o o o o o")
-)
-#pagebreak()
-#sutra-block(
+  vline("无苦集灭道无智亦无得", py: "wú kǔ jí miè dào wú zhì yì wú dé", notes: "o o o o o o o o o o"),
   vline("以无所得故菩提萨埵", py: "yǐ wú suǒ dé gù pú tí sà duǒ", notes: "o o o o o o o o o"),
   vline("依般若波罗蜜多故", py: "yī bō rě bō luó mì duō gù", notes: "o o o o o o o o"),
   vline("心无挂碍", py: "xīn wú guà ài", notes: "o o o o"),
@@ -187,14 +175,16 @@
   vline("三世诸佛依般若波罗蜜多故", py: "sān shì zhū fó yī bō rě bō luó mì duō gù", notes: "o o o o o o o o o o o o"),
   vline("得阿耨多罗三藐三菩提", py: "dé ā nuò duō luó sān miǎo sān pú tí", notes: "o o o o o o o o o o"),
   vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。"),
-  vline("故知般若波罗蜜多", py: "gù zhī bō rě bō luó mì duō", notes: "o o o o o o o o"),
+  vline("故知般若波罗蜜多", py: "gù zhī bō rě bō luó mì duō", notes: "o o o o o o o o")
+)
+
+// --- BOTTOM SECTION ---
+#v(4cm)
+#sutra-block(
   vline("是大神咒是大明咒", py: "shì dà shén zhòu shì dà míng zhòu", notes: "o o o o o o o o"),
   vline("是无上咒是无等等咒", py: "shì wú shàng zhòu shì wú děng děng zhòu", notes: "o o o o o o o o o"),
   vline("能除⼀切苦真实不虚", py: "néng chú yī qiē kǔ zhēn shí bù xū", notes: "o o o o o o o o o"),
-  vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。")
-)
-#pagebreak()
-#sutra-block(
+  vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "        。"),
   vline("故说般若波罗蜜多咒", py: "gù shuō bō rě bō luó mì duō zhòu", notes: "o o o o o o o o o"),
   vline("即说咒⽈", py: "jí shuō zhòu yuē", notes: "o o o o"),
   vline("“揭谛揭谛波罗揭谛", py: "jiē dì jiē dì bō luó jiē dì", notes: " o o o o o o o o"),
@@ -208,10 +198,7 @@
   vline("普贤十大愿", py: "pǔ xián shí dà yuàn"),
   vline("⼀者礼敬诸佛", py: "yī zhě lǐ jìng zhū fó"),
   vline("二者称赞如来", py: "èr zhě chēng zàn rú lái"),
-  vline("三者广修供养", py: "sān zhě guǎng xiū gong yǎng")
-)
-#pagebreak()
-#sutra-block(
+  vline("三者广修供养", py: "sān zhě guǎng xiū gong yǎng"),
   vline("四者忏悔业障", py: "sì zhě chàn huǐ yè zhàng", notes: "o o o o o o"),
   vline("五者随喜功德", py: "wǔ zhě suí xǐ gong dé", notes: "o o o o o o"),
   vline("普贤十大愿", py: "pǔ xián shí dà yuàn"),
@@ -225,10 +212,7 @@
   vline("⼀切菩萨摩诃萨", py: "yī qiè pú sà mó hē sà"),
   vline("摩诃般若波罗蜜", py: "mó hē bō rě bō luó mì"),
   vline("三皈依", py: "sān guī yī"),
-  vline("自皈依佛当愿众生体解大道发无上心", py: "zì guī yī fó dāng yuàn zhòng shēng tǐ jiě dà dào fā wú shàng xīn")
-)
-#pagebreak()
-#sutra-block(
+  vline("自皈依佛当愿众生体解大道发无上心", py: "zì guī yī fó dāng yuàn zhòng shēng tǐ jiě dà dào fā wú shàng xīn"),
   vline("自皈依法当愿众生深入经藏智慧如海", py: "zì guī yī fǎ dāng yuàn zhòng shēng shēn rù jīng zàng zhì huì rú hǎi", notes: "o o o o o o o o o o o o o o o o"),
   vline("自皈依僧当愿众生统理大众一切无碍", py: "zì guī yī sēng dāng yuàn zhòng shēng tǒng lǐ dà zhòng yī qiè wú ài", notes: "o o o o o o o o o o o o o o o o"),
   vline("回向偈", py: "huí xiàng jì"),
@@ -242,10 +226,7 @@
   vline("祈愿三业清净心无挂碍", py: "qí yuàn sān yè qīng jìng xīn wú guà ài"),
   vline("祈愿菩萨行愿福慧圆满", py: "qi yuàn pú sà xíng yuàn fú huì yuán mǎn"),
   vline("阿弥陀佛", py: "ā mí tuó fó"),
-  vline("回向偈", py: "huí xiàng jì")
-)
-#pagebreak()
-#sutra-block(
+  vline("回向偈", py: "huí xiàng jì"),
   vline("愿以此功德庄严佛净土", py: "yuàn yǐ cǐ gōng dé zhuāng yán fó jìng tǔ"),
   vline("上报四重恩下济三途苦", py: "shàng bào sì zhòng ēn xià jì sān tú kǔ"),
   vline("若有见闻者悉发菩提心", py: "ruò yǒu jiàn wén zhě xī fā pú tí xīn"),
