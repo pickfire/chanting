@@ -126,7 +126,9 @@
 
 // --- TOP SECTION ---
 #sutra-block(
-  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "o _ o o o o o o oo", subscript: "（三称）"),
+  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o oo"),
+  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o o"),
+  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ _ o o o o o o"),
   vline("开经偈", py: "kāi jīng jì"),
   vline("无上甚深微妙法", py: "wú shàng shén shēn wéi miào fǎ", notes: "o _ o o o o oo"),
   vline("百千万劫难遭遇", py: "bǎi qiān wàn jié nàn zāo yù", notes: "o o o o o o o"),
@@ -168,13 +170,13 @@
   vline("波罗僧揭谛菩提萨婆诃”", py: "bō luó sēng jiē dì pú tí sà pó hē", notes: "_ _ _ _ _ _ _ _ _ oo"),
   vline("普陀⼭琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "_ o o o o o o"),
   vline("大慈大悲观世⾳菩萨", py: "dà cí dà bēi guān shì yīn pú sà", notes: "o o o o o o o o o"),
-  vline("南无观世⾳菩萨", py: "ná mó guān shì yīn pú sà", notes: "_ o o o o o o"),
-  vline("转念四字", py: "")
+  vline("南无观世⾳菩萨", py: "ná mó guān shì yīn pú sà", notes: "_ o o o o o o")
 )
 
 // --- BOTTOM SECTION ---
 #v(4cm)
 #sutra-block(
+  vline("转念四字", py: ""),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o "),
