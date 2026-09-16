@@ -112,7 +112,7 @@
     col = stack(dir: ttb, spacing: 0pt, col, sub_box)
   }
   if bold {
-    box(rect(stroke: 0.8pt + black, inset: (x: 0pt, y: 2pt), radius: 2pt, col))
+    box(rect(stroke: 0.8pt + black, inset: (x: 0pt, y: 2pt), radius: 2pt, box(width: 13.2pt, col)))
   } else {
     box(col)
   }
