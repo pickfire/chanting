@@ -45,27 +45,31 @@
 }
 
 #let char-pinyin-note-vertical(c, p, n, is_last_bar: false, bold: false) = {
-  let n_rest_temp = n.replace("|", "")
-  let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 6.9pt } else { 3.6pt }
-  let has_left_line = n.contains("|")
-  let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
-  let n_rest = n.replace("|", "")
-  grid(
-    columns: (13.2pt, auto),
-    rows: (12pt, 8.4pt),
-    align: (center + horizon, left + top),
-    // Row 1: Character (col 1), Note (col 2)
-    box(width: 13.2pt, height: 12pt)[
-      #if has_left_line {
-        place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
-      }
-      #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: if bold { "bold" } else { "regular" }, c))
-    ],
-    if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
-    // Row 2: Pinyin (col 1), empty (col 2)
-    move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)),
-    []
-  )
+  if bold {
+    box(width: 13.2pt, height: 20.4pt, align(center + horizon)[#text(9.6pt, font: "AR PL New Kai", weight: "bold", c)])
+  } else {
+    let n_rest_temp = n.replace("|", "")
+    let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 6.9pt } else { 3.6pt }
+    let has_left_line = n.contains("|")
+    let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
+    let n_rest = n.replace("|", "")
+    grid(
+      columns: (13.2pt, auto),
+      rows: (12pt, 8.4pt),
+      align: (center + horizon, left + top),
+      // Row 1: Character (col 1), Note (col 2)
+      box(width: 13.2pt, height: 12pt)[
+        #if has_left_line {
+          place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
+        }
+        #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: "regular", c))
+      ],
+      if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
+      // Row 2: Pinyin (col 1), empty (col 2)
+      move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)),
+      []
+    )
+  }
 }
 
 #let vline(cn, py: "", notes: "", subscript: "", bold: false) = {
