@@ -44,14 +44,13 @@
   )
 }
 
-#let char-pinyin-note-vertical(c, p, n, is_last_bar: false, bold: false) = box(width: 1em)[ // increased box width so notes don't overflow
-  #set align(left) // FoRCE left alignment so the 2em character column NEVER shifts
-  #let n_rest_temp = n.replace("|", "")
-  #let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 6.9pt } else { 3.6pt }
-  #let has_left_line = n.contains("|")
-  #let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
-  #let n_rest = n.replace("|", "")
-  #grid(
+#let char-pinyin-note-vertical(c, p, n, is_last_bar: false, bold: false) = {
+  let n_rest_temp = n.replace("|", "")
+  let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 6.9pt } else { 3.6pt }
+  let has_left_line = n.contains("|")
+  let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
+  let n_rest = n.replace("|", "")
+  grid(
     columns: (13.2pt, auto),
     rows: (12pt, 8.4pt),
     align: (center + horizon, left + top),
@@ -67,7 +66,7 @@
     move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)),
     []
   )
-]
+}
 
 #let vline(cn, py: "", notes: "", subscript: "", bold: false) = {
   let c_arr = cn.clusters()
@@ -112,7 +111,7 @@
     col = stack(dir: ttb, spacing: 0pt, col, sub_box)
   }
   if bold {
-    box(rect(stroke: 0.8pt + black, inset: (x: 0pt, y: 2pt), radius: 2pt, box(width: 13.2pt, col)))
+    box(rect(stroke: 0.8pt + black, inset: (x: 0pt, y: 2pt), radius: 2pt, col))
   } else {
     box(col)
   }
