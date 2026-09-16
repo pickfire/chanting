@@ -60,7 +60,7 @@
       #if has_left_line {
         place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
       }
-      #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: if bold { "bold" } else { "regular" }, fill: if bold { white } else { black }, c))
+      #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: if bold { "bold" } else { "regular" }, c))
     ],
     if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
@@ -112,7 +112,7 @@
     col = stack(dir: ttb, spacing: 0pt, col, sub_box)
   }
   if bold {
-    box(rect(fill: black, inset: (x: 0pt, y: 2pt), radius: 2pt, col))
+    box(rect(stroke: 0.8pt + black, inset: (x: 0pt, y: 2pt), radius: 2pt, col))
   } else {
     box(col)
   }
