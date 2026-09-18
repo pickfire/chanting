@@ -46,7 +46,11 @@
 
 #let char-pinyin-note-vertical(c, p, n, is_last_bar: false, bold: false) = {
   if bold {
-    box(width: 13.2pt, height: 20.4pt, align(center + horizon)[#text(9.6pt, font: "AR PL New Kai", weight: "bold", c)])
+    box(width: 13.2pt, height: 20.4pt, align(top)[
+      #box(width: 13.2pt, height: 12pt, align(center + horizon)[
+        #text(9.6pt, font: "AR PL New Kai", weight: "bold", c)
+      ])
+    ])
   } else {
     let n_rest_temp = n.replace("|", "")
     let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 6.9pt } else { 3.6pt }
@@ -100,7 +104,7 @@
     cells.push(char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar, bold: bold))
   }
   
-  let col = stack(dir: ttb, spacing: 8pt, ..cells)
+  let col = stack(dir: ttb, spacing: 2pt, ..cells)
   if subscript != "" {
     let sub_chars = subscript.clusters()
     let sub_stack = stack(dir: ttb, spacing: 1.2pt, ..sub_chars.map(c => {
@@ -112,29 +116,28 @@
       }
     }))
     let sub_box = box(width: 13.2pt, height: 40.8pt, align(center + horizon, sub_stack))
-    col = stack(dir: ttb, spacing: 8pt, col, sub_box)
+    col = stack(dir: ttb, spacing: 2pt, col, sub_box)
   }
   if bold {
-    box(rect(stroke: 0.8pt + black, inset: (x: 0pt, y: 2pt), radius: 2pt, col))
+    box(width: 24pt, align(left)[#rect(stroke: 0.8pt + black, inset: 0pt, outset: (top: 6pt, bottom: -0.4pt, left: 1.5pt, right: 1.5pt), radius: 2pt, col)])
   } else {
-    box(col)
+    box(width: 24pt, align(left)[#col])
   }
 }
 
-#let sutra-block(..lines) = {
-  align(top + right)[
-    #stack(
-      dir: rtl,
-      spacing: 6pt,
-      ..lines
-    )
-  ]
-}
 
-#box(width: 100%, height: 100%)[
-// --- TOP SECTION ---
-#sutra-block(
-  vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó  ", notes: "^ _ o o o o o o o o"),
+
+// --- FULL PAGE LAYOUT ---
+#align(right)[
+#grid(
+  columns: (100%,),
+  rows: (auto, 1fr, auto),
+  box[
+      #set align(top + right)
+      #stack(
+        dir: rtl,
+        spacing: 5.2546pt,
+vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^ _ o o o o o o o o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o o"),
   vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ _ o o o o o o"),
   vline("开经偈", py: "", bold: true),
@@ -142,7 +145,7 @@
   vline("我今见闻得受持　愿解如来真实义", py: "wǒ jīn jiàn wén dé shòu chí  yuàn jiě rú lái zhēn shí yì", notes: "o o o o o o o o o o o o o o o"),
   vline("般若波罗蜜多心经", py: "bō rě bō luó mì duō xīn jīng", notes: "o _ o _ o _ o oo"),
   vline("观自在菩萨行深般若波罗蜜多时照", py: "guān zì zài pú sà xíng shēn bō rě bō luó mì duō shí zhào", notes: "o _ o _ o _ o _ o _ o _ o oo _"),
-  vline("见五蕴皆空度⼀切苦厄舍利子色不", py: "jiàn wǔ yùn jiē kōng dù yī qiē kǔ è shè lì zǐ sè bù", notes: "o _ o _ o _ o _ o oo _ _ _ _ _"),
+  vline("见五蕴皆空度一切苦厄舍利子色不", py: "jiàn wǔ yùn jiē kōng dù yī qiē kǔ è shè lì zǐ sè bù", notes: "o _ o _ o _ o _ o oo _ _ _ _ _"),
   vline("异空空不异色色即是空空即是色受", py: "yì kōng kōng bù yì sè sè jí shì kōng kōng jí shì sè shòu", notes: ""),
   vline("想行识亦复如是舍利子是诸法空相", py: "xiǎng xíng shí yì fù rú shì shè lì zǐ shì zhū fǎ kōng xiāng", notes: ""),
   vline("不生不灭不垢不净不增不减是故空", py: "bù shēng bù miè bù gòu bù jìng bù zēng bù jiǎn shì gù kōng", notes: ""),
@@ -155,21 +158,24 @@
   vline("颠倒梦想究竟涅槃三世诸佛依般若", py: "diān dǎo mèng xiǎng jiū jìng niè pán sān shì zhū fó yī bō rě", notes: "_ _ _ _ _ _ _ _ _ _ _ oo _ _ _"),
   vline("波罗蜜多故得阿耨多罗三藐三菩提", py: "bō luó mì duō gù dé ā nuò duō luó sān miǎo sān pú tí", notes: "_ _ _ _ oo _ _ _ _ _ _ _ _ _ oo"),
   vline("故知般若波罗蜜多是大神咒是大明", py: "gù zhī bō rě bō luó mì duō shì dà shén zhòu shì dà míng", notes: "_ _ _ _ _ _ _ oo _ _ _ oo _ _ _"),
-  vline("咒是无上咒是无等等咒能除⼀切苦", py: "zhòu shì wú shàng zhòu shì wú děng děng zhòu néng chú yī qiē kǔ", notes: "oo _ _ _ oo _ _ _ _ oo _ _ _ _ oo"),
+  vline("咒是无上咒是无等等咒能除一切苦", py: "zhòu shì wú shàng zhòu shì wú děng děng zhòu néng chú yī qiē kǔ", notes: "oo _ _ _ oo _ _ _ _ oo _ _ _ _ oo"),
   vline("真实不虚故说般若波罗蜜多咒即说", py: "zhēn shí bù xū gù shuō bō rě bō luó mì duō zhòu jí shuō", notes: "_ _ _ oo _ _ _ _ _ _ _ _ _ _ _"),
   vline("咒⽈揭谛揭谛波罗揭谛波罗僧揭谛", py: "zhòu yuē jiē dì jiē dì bō luó jiē dì bō luó sēng jiē dì", notes: "_ _ _ o _ o _ o _ o _ _ _ _ _"),
   vline("菩提萨婆诃", py: "pú tí sà pó hē", notes: "_ _ _ _ oo"),
   vline("普陀⼭琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "_ o o o o o o"),
   vline("大慈大悲观世⾳菩萨", py: "dà cí dà bēi guān shì yīn pú sà", notes: "o o o o o o o o o"),
   vline("南无观世⾳菩萨", py: "ná mó guān shì yīn pú sà", notes: "_ o o o o o o")
-)
-
-// --- BOTTOM SECTION ---
-
-#line(length: 100%, stroke: 0.5pt)
-
-#sutra-block(
-  vline("转念四字", py: "", bold: true),
+      )
+    ],
+  align(center + horizon)[
+    #line(length: 100%, stroke: 0.5pt)
+  ],
+  box[
+      #set align(top + right)
+      #stack(
+        dir: rtl,
+        spacing: 5.2546pt,
+vline("转念四字", py: "", bold: true),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- _ - o"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- _ - o"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "- _ - o"),
@@ -178,12 +184,12 @@
   vline("观音菩萨", py: "guān yīn pú sà", notes: "o- _ o- o"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "o- _ o- o"),
   vline("普贤十大愿", py: "", bold: true),
-  vline("⼀者礼敬诸佛　二者称赞如来", py: "yī zhě lǐ jìng zhū fó  èr zhě chēng zàn rú lái", notes: "_ _ _ _ _ oo _ _ _ _ _ _ oo"),
+  vline("一者礼敬诸佛　二者称赞如来", py: "yī zhě lǐ jìng zhū fó  èr zhě chēng zàn rú lái", notes: "_ _ _ _ _ oo _ _ _ _ _ _ oo"),
   vline("三者广修供养　四者忏悔业障", py: "sān zhě guǎng xiū gong yǎng  sì zhě chàn huǐ yè zhàng", notes: "_ _ _ _ _ oo _ o _ o _ o oo"),
   vline("五者随喜功德　六者请转法轮", py: "wǔ zhě suí xǐ gong dé  liù zhě qǐng zhuǎn fǎ lún", notes: "o _ o _ o oo _ o _ o _ o oo"),
   vline("七者请佛住世　八者常随佛学", py: "qī zhě qǐng fó zhù shì  bā zhě cháng suí fó xué", notes: "o _ o _ o oo _ o _ o _ o oo"),
   vline("九者恒顺众生　十者普皆回向", py: "jiǔ zhě héng shùn zhòng shēng  shí zhě pǔ jiē huí xiàng", notes: "o _ o _ o oo _ o _ o _ o oo"),
-  vline("十方三世⼀切佛　⼀切菩萨摩诃萨", py: "shí fāng sān shì yī qiè fó  yī qiè pú sà mó hē sà", notes: "o _ o _ o _ oo _ _ _ _ _ _ _ _"),
+  vline("十方三世一切佛　一切菩萨摩诃萨", py: "shí fāng sān shì yī qiè fó  yī qiè pú sà mó hē sà", notes: "o _ o _ o _ oo _ _ _ _ _ _ _ _"),
   vline("摩诃般若波罗蜜", py: "mó hē bō rě bō luó mì", notes: ""),
   vline("三皈依", py: "", bold: true),
   vline("自皈依佛当愿众生体解大道发无上心", py: "zì guī yī fó dāng yuàn zhòng shēng tǐ jiě dà dào fā wú shàng xīn", notes: "o _ o oo _ _ o _ _ _ o _ _ _ o oo"),
@@ -204,6 +210,7 @@
   vline("若有见闻者悉发菩提心", py: "ruò yǒu jiàn wén zhě xī fā pú tí xīn"),
   vline("常行菩萨道广度诸有情", py: "cháng xìn pú sà dào guǎng dù zhū yǒu qíng"),
   vline("阿弥陀佛", py: "ā mí tuó fó")
+      )
+    ]
 )
-
 ]
