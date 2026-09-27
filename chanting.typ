@@ -73,7 +73,7 @@
         }
         #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: "regular", c))
       ],
-      if r1_note != "" and r1_note != " " and r1_note != "　" { pad(top: top-pad, draw-note(r1_note)) } else { [] },
+      if r1_note != "" and r1_note != " " and r1_note != "　" { move(dy: top-pad, draw-note(r1_note)) } else { [] },
       // Row 2: Pinyin (col 1), empty (col 2)
       move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -2.4pt, draw-note(r2_note)) } else { [] },
     )
