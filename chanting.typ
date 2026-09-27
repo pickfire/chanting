@@ -55,7 +55,7 @@
     ])
   } else {
     let n_rest_temp = n.replace("|", "")
-    let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 6.9pt } else { 3.6pt }
+    let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" or n_rest_temp == "--" { 6.9pt } else { 3.6pt }
     let has_left_line = n.contains("|")
     let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
     let n_rest = n.replace("|", "")
@@ -75,7 +75,7 @@
       ],
       if r1_note != "" and r1_note != " " and r1_note != "　" { move(dy: top-pad, draw-note(r1_note)) } else { [] },
       // Row 2: Pinyin (col 1), empty (col 2)
-      move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -2.4pt, draw-note(r2_note)) } else { [] },
+      move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -0.6pt, draw-note(r2_note)) } else { [] },
     )
   }
 }
@@ -142,8 +142,8 @@
         dir: rtl,
         spacing: 5.2546pt,
         vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^ _ o o o o o o o o"),
-        vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^o o o o o o o o o o"),
-        vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^o o o- o o o o o o o"),
+        vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "o o o o o o o o o o"),
+        vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "o o o- o o o o o o o"),
         vline("开经偈", bold: true),
         vline("无上甚深微妙法　百千万劫难遭遇", py: "wú shàng shén shēn wéi miào fǎ  bǎi qiān wàn jié nàn zāo yù", notes: "^o _ o o o o o- _ o o o o o o o"),
         vline("我今见闻得受持　愿解如来真实义", py: "wǒ jīn jiàn wén dé shòu chí  yuàn jiě rú lái zhēn shí yì", notes: "o o o o o o o _ o o o o o- o o-"),
@@ -166,7 +166,9 @@
         vline("真实不虚故说般若波罗蜜多咒即说", py: "zhēn shí bù xū gù shuō bō rě bō luó mì duō zhòu jí shuō", notes: "o o o o o o o o o o o o o o o"),
         vline("咒曰揭谛揭谛波罗揭谛波罗僧揭谛", py: "zhòu yuē jiē dì jiē dì bō luó jiē dì bō luó sēng jiē dì", notes: "o o- o o o o o o o o o o o- o o"),
         vline("菩提萨婆诃　", py: "pú tí sà pó hē", notes: "o o o- _ o- o-"),
-        vline("摩诃般若波罗蜜多", py: "mó hē bō rè bō luó mí duō", notes: "^o -- o o o o o o"),
+        vline("摩诃般若波罗蜜多", py: "mó hē bō rè bō luó mí duō", notes: "^o -- o -- o -- o- o"),
+        vline("摩诃般若波罗蜜多", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o- o"),
+        vline("摩诃般若波罗蜜多", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o- o"),
         vline("普陀山琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "^o o o o o o o"),
         vline("大慈大悲观世音菩萨", py: "dà cí dà bēi guān shì yīn pú sà", notes: "o o o o o o o o o"),
         vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà", notes: "_ o o o o o o"),

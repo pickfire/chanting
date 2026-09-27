@@ -49,7 +49,7 @@
 #let char-pinyin-note-vertical(c, p, n, is_last_bar: false) = box(width: 1em)[ // increased box width so notes don't overflow
   #set align(left) // FoRCE left alignment so the 2em character column NEVER shifts
   #let n_rest_temp = n.replace("|", "")
-  #let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" { 11.5pt } else { 6pt }
+  #let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" or n_rest_temp == "--" { 11.5pt } else { 6pt }
   #let has_left_line = n.contains("|")
   #let line_len = if is_last_bar { 28pt } else { 34pt }
   #let n_rest = n.replace("|", "")
@@ -69,7 +69,7 @@
     ],
     if r1_note != "" and r1_note != " " and r1_note != "　" { move(dy: top-pad, draw-note(r1_note)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
-    move(dy: -4pt, text(7.5pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -4pt, draw-note(r2_note)) } else { [] },
+    move(dy: -4pt, text(7.5pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -1pt, draw-note(r2_note)) } else { [] },
   )
 ]
 
