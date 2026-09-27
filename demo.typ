@@ -53,6 +53,9 @@
   #let has_left_line = n.contains("|")
   #let line_len = if is_last_bar { 28pt } else { 34pt }
   #let n_rest = n.replace("|", "")
+  #let r1_note = if n_rest == "--" { "-" } else if n_rest == "o-" { "o" } else { n_rest }
+  #let r2_note = if n_rest == "--" or n_rest == "o-" { "-" } else { "" }
+
   #grid(
     columns: (2em, auto),
     rows: (20pt, 14pt),
@@ -64,9 +67,9 @@
       }
       #place(center + horizon, text(16pt, font: "AR PL New Kai", c))
     ],
-    if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
+    if r1_note != "" and r1_note != " " and r1_note != "　" { pad(top: top-pad, draw-note(r1_note)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
-    move(dy: -4pt, text(7.5pt, fill: rgb("666"), p)), [],
+    move(dy: -4pt, text(7.5pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -4pt, pad(top: top-pad, draw-note(r2_note))) } else { [] },
   )
 ]
 
