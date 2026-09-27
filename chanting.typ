@@ -15,11 +15,11 @@
         #place(center + horizon, circle(radius: 0.4pt, fill: rgb("1E88E5"))) // Blue
       ]
     } else if n == "△" or n == "^" {
-      // Right triangle rotated 90 degrees
+      // Right triangle rotated 90 degrees (proportioned to the golden ratio φ ≈ 1.618)
       place(center + top, polygon(
         fill: none,
-        stroke: 0.5pt + rgb("E53935"), // Red
-        (0pt, 0pt), (3.6pt, 0pt), (3.6pt, 3.6pt)
+        stroke: (paint: rgb("E53935"), thickness: 0.5pt, miter-limit: 10.0), // Red
+        (0pt, 0pt), (3.6pt, 0pt), (3.6pt, 2.225pt)
       ))
     } else if n == "⊥" or n == "T" {
       box(width: 3.6pt, height: 3.6pt)[
