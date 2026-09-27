@@ -137,9 +137,9 @@
       #stack(
         dir: rtl,
         spacing: 5.2546pt,
-vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^ _ o o o o o o o o"),
-  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ o o o o o o o"),
-  vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^ _ _ o o o o o o"),
+  vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^ _ o o o o o o o o"),
+  vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^o o o o o o o o o o"),
+  vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^o o o- o o o o o o o"),
   vline("开经偈", py: "", bold: true),
   vline("无上甚深微妙法　百千万劫难遭遇", py: "wú shàng shén shēn wéi miào fǎ  bǎi qiān wàn jié nàn zāo yù", notes: "o _ o o o o o o o o o o o o o"),
   vline("我今见闻得受持　愿解如来真实义", py: "wǒ jīn jiàn wén dé shòu chí  yuàn jiě rú lái zhēn shí yì", notes: "o o o o o o o o o o o o o o o"),
