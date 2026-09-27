@@ -69,7 +69,7 @@
       // Row 1: Character (col 1), Note (col 2)
       box(width: 13.2pt, height: 12pt)[
         #if has_left_line {
-          place(left + top, line(angle: 90deg, length: line_len, stroke: 1.5pt + rgb("999999")))
+          place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
         }
         #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: "regular", c))
       ],
