@@ -1,0 +1,15 @@
+{
+  "auto-format-typst": {
+    "PostToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "typstyle -i -l 300 ../*.typ 2>/dev/null; echo '{}'"
+          }
+        ]
+      }
+    ]
+  }
+}
