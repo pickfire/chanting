@@ -141,7 +141,7 @@
       #stack(
         dir: rtl,
         spacing: 5.2546pt,
-        vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^ _ o o o o o o o o"),
+        vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "^o _ o o o o o o o o"),
         vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "o o o o o o o o o o"),
         vline("南无本师释迦牟尼佛　", py: "ná mó běn shī shì jiā móu ní fó ", notes: "o o o- o o o o o o o"),
         vline("开经偈", bold: true),
