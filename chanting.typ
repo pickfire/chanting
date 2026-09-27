@@ -59,8 +59,8 @@
     let has_left_line = n.contains("|")
     let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
     let n_rest = n.replace("|", "")
-    let r1_note = if n_rest == "--" { "-" } else if n_rest == "o-" { "o" } else { n_rest }
-    let r2_note = if n_rest == "--" or n_rest == "o-" { "-" } else { "" }
+    let r1_note = if n_rest == "--" { "-" } else { n_rest }
+    let r2_note = if n_rest == "--" { "-" } else { "" }
 
     grid(
       columns: (13.2pt, auto),
