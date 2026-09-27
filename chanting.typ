@@ -57,7 +57,7 @@
     let n_rest_temp = n.replace("|", "")
     let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" or n_rest_temp == "--" { 6.9pt } else { 3.6pt }
     let has_left_line = n.contains("|")
-    let line_len = if is_last_bar { 16.8pt } else { 20.4pt }
+    let line_len = if is_last_bar { 16.8pt } else { 22.4pt }
     let n_rest = n.replace("|", "")
     let r1_note = if n_rest == "--" { "-" } else { n_rest }
     let r2_note = if n_rest == "--" { "-" } else { "" }
