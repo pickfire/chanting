@@ -1,6 +1,6 @@
 #set page(
   paper: "a4",
-  flipped: true, 
+  flipped: true,
   margin: 1.5cm,
 )
 
@@ -19,7 +19,9 @@
       place(center + top, polygon(
         fill: none,
         stroke: (paint: rgb("E53935"), thickness: 0.8pt, miter-limit: 10.0), // Red
-        (0pt, 0pt), (6pt, 0pt), (6pt, 3.708pt)
+        (0pt, 0pt),
+        (6pt, 0pt),
+        (6pt, 3.708pt),
       ))
     } else if n == "⊥" or n == "T" {
       box(width: 6pt, height: 6pt)[
@@ -40,7 +42,7 @@
   stack(
     dir: ttb,
     spacing: -2.5pt,
-    ..notes.map(char => draw-single-note(char))
+    ..notes.map(char => draw-single-note(char)),
   )
 }
 
@@ -64,20 +66,19 @@
     ],
     if n_rest != "" and n_rest != " " and n_rest != "　" { pad(top: top-pad, draw-note(n_rest)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
-    move(dy: -4pt, text(7.5pt, fill: rgb("666"), p)),
-    []
+    move(dy: -4pt, text(7.5pt, fill: rgb("666"), p)), [],
   )
 ]
 
 #let vline(cn, py: "", notes: "", subscript: "") = {
   let c_arr = cn.clusters()
   let p_arr = if py != "" { py.split(" ") } else { () }
-  
+
   // Use split(" ") to allow grouping multiple notes to one character!
   let n_arr = if notes != "" { notes.split(" ") } else { () }
-  
+
   let max_len = calc.max(c_arr.len(), p_arr.len(), n_arr.len())
-  
+
   let cells = ()
   for i in range(max_len) {
     let c = c_arr.at(i, default: "　")
@@ -85,7 +86,7 @@
     let n = n_arr.at(i, default: "")
     if n == " " or n == "　" { n = "" }
     if c == " " or c == "" { c = "　" }
-    
+
     let is_last_bar = false
     if n.contains("|") {
       let next_n = n_arr.at(i + 1, default: "")
@@ -93,10 +94,10 @@
         is_last_bar = true
       }
     }
-    
+
     cells.push(char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar))
   }
-  
+
   let col = stack(dir: ttb, spacing: 0pt, ..cells)
   if subscript != "" {
     let sub_chars = subscript.clusters()
@@ -119,7 +120,7 @@
     #stack(
       dir: rtl,
       spacing: 2.5em,
-      ..lines
+      ..lines,
     )
   ]
 }
@@ -137,5 +138,5 @@
   vline("观音菩萨", py: "guān yīn pú sà", notes: "o-  o- o"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
   vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
-  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o")
+  vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
 )
