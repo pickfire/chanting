@@ -55,7 +55,7 @@
     ])
   } else {
     let n_rest_temp = n.replace("|", "")
-    let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" or n_rest_temp == "--" { 6.9pt } else { 3.6pt }
+    let top-pad = if n.contains("^") { -22.4pt } else if n_rest_temp == "-" or n_rest_temp == "--" { 6.9pt } else { 3.6pt }
     let has_left_line = n.contains("|")
     let line_len = if is_last_bar { 16.8pt } else { 22.4pt }
     let n_rest = n.replace("|", "")
