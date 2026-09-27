@@ -69,7 +69,7 @@
       // Row 1: Character (col 1), Note (col 2)
       box(width: 13.2pt, height: 12pt)[
         #if has_left_line {
-          place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
+          place(left + top, line(angle: 90deg, length: line_len, stroke: 1.5pt + rgb("999999")))
         }
         #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: "regular", c))
       ],
@@ -169,7 +169,7 @@
         vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "^o -- o -- o -- o- o- -o"),
         vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o- o- -o"),
         vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o- o- -o"),
-        vline("普陀山琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "^o |o |o o o o o"),
+        vline("普陀山琉璃世界", py: "pǔ tuó shān liú lí shì jiè", notes: "|^o |o o o o o o"),
         vline("大慈大悲观世音菩萨", py: "dà cí dà bēi guān shì yīn pú sà", notes: "o o o o o o o o o"),
         vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà", notes: "_ o o o o o o"),
       )
