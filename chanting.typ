@@ -4,78 +4,79 @@
   margin: 1cm,
 )
 
-#let draw-single-note(n) = {
-  // Fixed size box for all symbols so they align identically
-  box(width: 4.8pt, height: 4.8pt, align(center + horizon)[
-    #if n == "o" or n == "O" or n == "○" or n == "。" {
-      place(center + horizon, circle(radius: 0.9pt, stroke: 0.5pt + rgb("1E88E5"))) // Blue
-    } else if n == "◎" or n == "@" {
-      box(width: 3.6pt, height: 3.6pt)[
-        #place(center + horizon, circle(radius: 1.5pt, stroke: 0.5pt + rgb("1E88E5"))) // Blue
-        #place(center + horizon, circle(radius: 0.4pt, fill: rgb("1E88E5"))) // Blue
-      ]
-    } else if n == "△" or n == "^" {
-      // Right triangle rotated 90 degrees (proportioned to the golden ratio φ ≈ 1.618)
-      place(center + top, polygon(
-        fill: none,
-        stroke: (paint: rgb("E53935"), thickness: 0.5pt, miter-limit: 10.0), // Red
-        (0pt, 0pt),
-        (3.6pt, 0pt),
-        (3.6pt, 2.225pt),
-      ))
-    } else if n == "⊥" or n == "T" {
-      box(width: 3.6pt, height: 3.6pt)[
-        #place(line(start: (1.8pt, 0pt), end: (1.8pt, 3.6pt), stroke: 0.5pt + rgb("E53935"))) // Red
-        #place(line(start: (0pt, 3.6pt), end: (3.6pt, 3.6pt), stroke: 0.5pt + rgb("E53935"))) // Red
-      ]
-    } else if n == "_" or n == " " or n == "" { none } else if n == "-" {
-      // Horizontal dash - centered vertically using place!
-      place(center + horizon, line(length: 3pt, stroke: 0.5pt + rgb("E53935"))) // Red
-    } else {
-      text(7.2pt, fill: rgb("E53935"), weight: "bold", n)
-    }
-  ])
-}
+#let kai-font = "AR PL New Kai"
+#let blue-note = rgb("1E88E5")
+#let red-note = rgb("E53935")
 
-#let draw-note(n) = {
-  let notes = n.clusters()
-  stack(
-    dir: ttb,
-    spacing: -1.5pt,
-    ..notes.map(char => draw-single-note(char)),
-  )
-}
+#let draw-single-note(n) = box(width: 4.8pt, height: 4.8pt, align(center + horizon, {
+  if n in ("o", "O", "○", "。") {
+    place(center + horizon, circle(radius: 0.9pt, stroke: 0.5pt + blue-note))
+  } else if n in ("◎", "@") {
+    box(width: 3.6pt, height: 3.6pt, {
+      place(center + horizon, circle(radius: 1.5pt, stroke: 0.5pt + blue-note))
+      place(center + horizon, circle(radius: 0.4pt, fill: blue-note))
+    })
+  } else if n in ("△", "^") {
+    place(center + top, polygon(
+      fill: none,
+      stroke: (paint: red-note, thickness: 0.5pt, miter-limit: 10.0),
+      (0pt, 0pt),
+      (3.6pt, 0pt),
+      (3.6pt, 2.225pt),
+    ))
+  } else if n in ("⊥", "T") {
+    box(width: 3.6pt, height: 3.6pt, {
+      place(line(start: (1.8pt, 0pt), end: (1.8pt, 3.6pt), stroke: 0.5pt + red-note))
+      place(line(start: (0pt, 3.6pt), end: (3.6pt, 3.6pt), stroke: 0.5pt + red-note))
+    })
+  } else if n == "-" {
+    place(center + horizon, line(length: 3pt, stroke: 0.5pt + red-note))
+  } else if n not in ("_", " ", "") {
+    text(7.2pt, fill: red-note, weight: "bold", n)
+  }
+}))
+
+#let draw-note(n) = stack(
+  dir: ttb,
+  spacing: -1.5pt,
+  ..n.clusters().map(draw-single-note),
+)
 
 #let char-pinyin-note-vertical(c, p, n, is_last_bar: false, bold: false) = {
   if bold {
-    box(width: 13.2pt, height: 20.4pt, align(top)[
-      #box(width: 13.2pt, height: 12pt, align(center + horizon)[
-        #text(9.6pt, font: "AR PL New Kai", weight: "bold", c)
-      ])
-    ])
+    box(width: 13.2pt, height: 20.4pt, align(top,
+      box(width: 13.2pt, height: 12pt, align(center + horizon,
+        text(9.6pt, font: kai-font, weight: "bold", c)
+      ))
+    ))
   } else {
-    let n_rest_temp = n.replace("|", "")
-    let top-pad = if n.contains("^") { 0pt } else if n_rest_temp == "-" or n_rest_temp == "--" { 6.9pt } else { 3.6pt }
-    let has_left_line = n.contains("|")
-    let line_len = if is_last_bar { 16.8pt } else { 22.4pt }
     let n_rest = n.replace("|", "")
-    let r1_note = if n_rest == "--" { "-" } else if n_rest.contains("_-") { n_rest.replace("_-", "") } else { n_rest }
-    let r2_note = if n_rest == "--" or n_rest.contains("_-") { "-" } else { "" }
+    let top_pad = if n.contains("^") { 0pt } else if n_rest in ("-", "--") { 6.9pt } else { 3.6pt }
+    let line_len = if is_last_bar { 16.8pt } else { 22.4pt }
+
+    let (r1_note, r2_note) = if n_rest == "--" {
+      ("-", "-")
+    } else if n_rest.contains("_-") {
+      (n_rest.replace("_-", ""), "-")
+    } else {
+      (n_rest, "")
+    }
 
     grid(
       columns: (13.2pt, auto),
       rows: (12pt, 8.4pt),
       align: (center + horizon, left + top),
       // Row 1: Character (col 1), Note (col 2)
-      box(width: 13.2pt, height: 12pt)[
-        #if has_left_line {
+      box(width: 13.2pt, height: 12pt, {
+        if n.contains("|") {
           place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
         }
-        #place(center + horizon, text(9.6pt, font: "AR PL New Kai", weight: "regular", c))
-      ],
-      if r1_note != "" and r1_note != " " and r1_note != "　" { move(dy: top-pad, draw-note(r1_note)) } else { [] },
+        place(center + horizon, text(9.6pt, font: kai-font, weight: "regular", c))
+      }),
+      if r1_note not in ("", " ", "　") { move(dy: top_pad, draw-note(r1_note)) } else { [] },
       // Row 2: Pinyin (col 1), empty (col 2)
-      move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -0.6pt, draw-note(r2_note)) } else { [] },
+      move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)),
+      if r2_note != "" { move(dy: -0.6pt, draw-note(r2_note)) } else { [] },
     )
   }
 }
@@ -97,7 +98,8 @@
     columns: (13.2pt, auto),
     rows: (8.4pt,),
     align: (center + horizon, left + top),
-    box(width: 13.2pt, height: 8.4pt)[], if top_note != "" { draw-note(top_note) } else { [] },
+    [],
+    if top_note != "" { draw-note(top_note) },
   )
 
   let max_len = calc.max(c_arr.len(), p_arr.len(), n_arr.len())
@@ -107,30 +109,18 @@
     let c = c_arr.at(i, default: "　")
     let p = p_arr.at(i, default: " ")
     let n = n_arr.at(i, default: "")
-    if n == " " or n == "　" { n = "" }
-    if c == " " or c == "" { c = "　" }
+    if n in (" ", "　") { n = "" }
+    if c in (" ", "") { c = "　" }
 
-    let is_last_bar = false
-    if n.contains("|") {
-      let next_n = n_arr.at(i + 1, default: "")
-      if not next_n.contains("|") {
-        is_last_bar = true
-      }
-    }
-
+    let is_last_bar = n.contains("|") and not n_arr.at(i + 1, default: "").contains("|")
     cells.push(char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar, bold: bold))
   }
 
   let col = stack(dir: ttb, spacing: 2pt, ..cells)
   if subscript != "" {
-    let sub_chars = subscript.clusters()
-    let sub_stack = stack(dir: ttb, spacing: 1.2pt, ..sub_chars.map(c => {
-      let t = text(7.2pt, font: "AR PL New Kai", fill: rgb("333"), c)
-      if c == "（" or c == "）" or c == "(" or c == ")" {
-        rotate(90deg, t)
-      } else {
-        t
-      }
+    let sub_stack = stack(dir: ttb, spacing: 1.2pt, ..subscript.clusters().map(c => {
+      let t = text(7.2pt, font: kai-font, fill: rgb("333"), c)
+      if c in "（）()" { rotate(90deg, t) } else { t }
     }))
     let sub_box = box(width: 13.2pt, height: auto, align(center + top, move(dy: 4pt, sub_stack)))
     col = stack(dir: ttb, spacing: 2pt, col, sub_box)
@@ -142,21 +132,20 @@
     col
   }
 
-  box(width: 24pt, align(left)[#content])
+  box(width: 24pt, align(left, content))
 }
 
-
+#let chant-section(..lines) = box[
+  #set align(top + right)
+  #stack(dir: rtl, spacing: 5.2546pt, ..lines)
+]
 
 // --- FULL PAGE LAYOUT ---
 #align(right)[
   #grid(
     columns: (100%,),
     rows: (auto, 1fr, auto),
-    box[
-      #set align(top + right)
-      #stack(
-        dir: rtl,
-        spacing: 5.2546pt,
+    chant-section(
         vline("", subscript: "（问讯、礼佛三拜、问讯）"),
         vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^o _ o o o o o o o- o"),
         vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "o o o o o o o o o o"),
@@ -195,16 +184,9 @@
         vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o", subscript: "（多次）"),
         vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o-", subscript: "（通知煞板）"),
         vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o-- o", subscript: "（煞板、过门）"),
-      )
-    ],
-    align(center + horizon)[
-      #line(length: 100%, stroke: 0.5pt)
-    ],
-    box[
-      #set align(top + right)
-      #stack(
-        dir: rtl,
-        spacing: 5.2546pt,
+    ),
+    align(center + horizon, line(length: 100%, stroke: 0.5pt)),
+    chant-section(
         vline("普贤十大愿", bold: true),
         vline("一者礼敬诸佛　二者称赞如来　", py: "yī zhě lǐ jìng zhū fó  èr zhě chēng zàn rú lái", notes: "- - - - - - - - - - - - - -"),
         vline("三者广修供养　四者忏悔业障　", py: "sān zhě guǎng xiū gong yǎng  sì zhě chàn huǐ yè zhàng", notes: "- - - - - - - - - - - - - -"),
@@ -230,7 +212,6 @@
         vline("祈愿甘露法雨长养慈悲", py: "qí yuàn gān lù fǎ yǔ zhǎng yǎng cí bēi", notes: ""),
         vline("祈愿三业清净心无挂碍", py: "qí yuàn sān yè qīng jìng xīn wú guà ài", notes: ""),
         vline("祈愿菩萨行愿福慧圆满", py: "qi yuàn pú sà xíng yuàn fú huì yuán mǎn", notes: "- _ _ _ _ _ _ - _ -", subscript: "（礼佛三拜、问讯）"),
-      )
-    ],
+    ),
   )
 ]
