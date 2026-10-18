@@ -59,8 +59,8 @@
     let has_left_line = n.contains("|")
     let line_len = if is_last_bar { 16.8pt } else { 22.4pt }
     let n_rest = n.replace("|", "")
-    let r1_note = if n_rest == "--" { "-" } else { n_rest }
-    let r2_note = if n_rest == "--" { "-" } else { "" }
+    let r1_note = if n_rest == "--" { "-" } else if n_rest.contains("_-") { n_rest.replace("_-", "") } else { n_rest }
+    let r2_note = if n_rest == "--" or n_rest.contains("_-") { "-" } else { "" }
 
     grid(
       columns: (13.2pt, auto),
@@ -165,10 +165,10 @@
         vline("咒是无上咒是无等等咒能除一切苦", py: "zhòu shì wú shàng zhòu shì wú děng děng zhòu néng chú yī qiē kǔ", notes: "o o o o o o o o o o o o o o o"),
         vline("真实不虚故说般若波罗蜜多咒即说", py: "zhēn shí bù xū gù shuō bō rě bō luó mì duō zhòu jí shuō", notes: "o o o o o o o o o o o o o o o"),
         vline("咒曰揭谛揭谛波罗揭谛波罗僧揭谛", py: "zhòu yuē jiē dì jiē dì bō luó jiē dì bō luó sēng jiē dì", notes: "o o- o o o o o o o o o o o- o o"),
-        vline("菩提萨婆诃　", py: "pú tí sà pó hē", notes: "o o o- _ o- o-"),
-        vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "^o -- o -- o -- o- o- -"),
-        vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o- o- -"),
-        vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o- o- -o"),
+        vline("菩提萨婆诃　", py: "pú tí sà pó hē", notes: "o o o- o o -- o"),
+        vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "^o -- o -- o -- o_- o --"),
+        vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o_- o --"),
+        vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o_- o -- o"),
         vline("普陀山琉璃世界　", py: "pǔ tuó shān liú lí shì jiè ", notes: "^o |- |- o -- o- o --"),
         vline("大慈大悲　观世音菩萨", py: "dà cí dà bēi  guān shì yīn pú sà", notes: "o -- o- o -- o -- o- o- o"),
         vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà", notes: "^o _ o- _ o- _ o"),
