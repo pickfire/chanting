@@ -119,7 +119,7 @@
         t
       }
     }))
-    let sub_box = box(width: 13.2pt, height: 40.8pt, align(center + horizon, sub_stack))
+    let sub_box = box(width: 13.2pt, height: auto, align(center + top, move(dy: 4pt, sub_stack)))
     col = stack(dir: ttb, spacing: 2pt, col, sub_box)
   }
   if bold {
@@ -187,7 +187,7 @@
         vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o _"),
         vline("观音菩萨", py: "guān yīn pú sà", notes: "- - o _"),
         vline("观音菩萨", py: "guān yīn pú sà", notes: "o- _ o- o"),
-        vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o"),
+        vline("观音菩萨", py: "guān yīn pú sà", notes: "o- o o- o", subscript: "（直到煞板）"),
         vline("普贤十大愿", bold: true),
         vline("一者礼敬诸佛　二者称赞如来　", py: "yī zhě lǐ jìng zhū fó  èr zhě chēng zàn rú lái", notes: "- - - - - - - - - - - - - -"),
         vline("三者广修供养　四者忏悔业障　", py: "sān zhě guǎng xiū gong yǎng  sì zhě chàn huǐ yè zhàng", notes: "- - - - - - - - - - - - - -"),
