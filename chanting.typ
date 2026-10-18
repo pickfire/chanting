@@ -169,8 +169,8 @@
         vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "^o -- o -- o -- o_- o --"),
         vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o_- o --"),
         vline("摩诃般若波罗蜜多　", py: "mó hē bō rè bō luó mí duō", notes: "o -- o -- o -- o_- o -- o"),
-        vline("普陀山琉璃世界　", py: "pǔ tuó shān liú lí shì jiè ", notes: "^o |- |- o -- o- o --"),
-        vline("大慈大悲　观世音菩萨", py: "dà cí dà bēi  guān shì yīn pú sà", notes: "o -- o- o -- o -- o- o- o"),
+        vline("普陀山琉璃世界　", py: "pǔ tuó shān liú lí shì jiè ", notes: "^o |- |- o -- o_- o --"),
+        vline("大慈大悲　观世音菩萨", py: "dà cí dà bēi  guān shì yīn pú sà", notes: "o -- o_- o -- o -- o- o- o"),
         vline("南无观世音菩萨", py: "ná mó guān shì yīn pú sà", notes: "^o _ o- _ o- _ o"),
       )
     ],
