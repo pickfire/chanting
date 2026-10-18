@@ -87,9 +87,11 @@
   // Use split(" ") to allow grouping multiple notes to one character!
   let n_arr = if notes != "" { notes.split(" ") } else { () }
 
+  let top_row = box(width: 13.2pt, height: 8.4pt)[]
+
   let max_len = calc.max(c_arr.len(), p_arr.len(), n_arr.len())
 
-  let cells = ()
+  let cells = if bold { () } else { (top_row,) }
   for i in range(max_len) {
     let c = c_arr.at(i, default: "　")
     let p = p_arr.at(i, default: " ")
@@ -122,11 +124,14 @@
     let sub_box = box(width: 13.2pt, height: auto, align(center + top, move(dy: 4pt, sub_stack)))
     col = stack(dir: ttb, spacing: 2pt, col, sub_box)
   }
-  if bold {
-    box(width: 24pt, align(left)[#rect(stroke: 0.8pt + black, inset: 0pt, outset: (top: 6pt, bottom: -0.4pt, left: 1.5pt, right: 1.5pt), radius: 2pt, col)])
+
+  let content = if bold {
+    stack(box(height: 10.4pt), rect(stroke: 0.8pt + black, inset: 0pt, outset: (top: 6pt, bottom: -0.4pt, left: 1.5pt, right: 1.5pt), radius: 2pt, col))
   } else {
-    box(width: 24pt, align(left)[#col])
+    col
   }
+
+  box(width: 24pt, align(left)[#content])
 }
 
 
