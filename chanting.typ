@@ -42,46 +42,62 @@
   ..n.clusters().map(draw-single-note),
 )
 
-#let char-pinyin-note-vertical(c, p, n, is_last_bar: false, bold: false) = {
-  if bold {
-    box(width: 13.2pt, height: 20.4pt, align(top,
-      box(width: 13.2pt, height: 12pt, align(center + horizon,
-        text(9.6pt, font: kai-font, weight: "bold", c)
-      ))
-    ))
+#let char-pinyin-note-vertical(c, p, n, is_last_bar: false) = {
+  let n_rest = n.replace("|", "")
+  let top_pad = if n.contains("^") { 0pt } else if n_rest in ("-", "--") { 6.9pt } else { 3.6pt }
+  let line_len = if is_last_bar { 16.8pt } else { 22.4pt }
+
+  let (r1_note, r2_note) = if n_rest == "--" {
+    ("-", "-")
+  } else if n_rest.contains("_-") {
+    (n_rest.replace("_-", ""), "-")
   } else {
-    let n_rest = n.replace("|", "")
-    let top_pad = if n.contains("^") { 0pt } else if n_rest in ("-", "--") { 6.9pt } else { 3.6pt }
-    let line_len = if is_last_bar { 16.8pt } else { 22.4pt }
-
-    let (r1_note, r2_note) = if n_rest == "--" {
-      ("-", "-")
-    } else if n_rest.contains("_-") {
-      (n_rest.replace("_-", ""), "-")
-    } else {
-      (n_rest, "")
-    }
-
-    grid(
-      columns: (13.2pt, auto),
-      rows: (12pt, 8.4pt),
-      align: (center + horizon, left + top),
-      // Row 1: Character (col 1), Note (col 2)
-      box(width: 13.2pt, height: 12pt, {
-        if n.contains("|") {
-          place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
-        }
-        place(center + horizon, text(9.6pt, font: kai-font, weight: "regular", c))
-      }),
-      if r1_note not in ("", " ", "　") { move(dy: top_pad, draw-note(r1_note)) } else { [] },
-      // Row 2: Pinyin (col 1), empty (col 2)
-      move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)),
-      if r2_note != "" { move(dy: -0.6pt, draw-note(r2_note)) } else { [] },
-    )
+    (n_rest, "")
   }
+
+  grid(
+    columns: (13.2pt, auto),
+    rows: (12pt, 8.4pt),
+    align: (center + horizon, left + top),
+    // Row 1: Character (col 1), Note (col 2)
+    box(width: 13.2pt, height: 12pt, {
+      if n.contains("|") {
+        place(left + top, line(angle: 90deg, length: line_len, stroke: 0.9pt + rgb("999999")))
+      }
+      place(center + horizon, text(9.6pt, font: kai-font, weight: "regular", c))
+    }),
+    if r1_note not in ("", " ", "　") { move(dy: top_pad, draw-note(r1_note)) } else { [] },
+    // Row 2: Pinyin (col 1), empty (col 2)
+    move(dy: -2.4pt, text(4.5pt, fill: rgb("666"), p)),
+    if r2_note != "" { move(dy: -0.6pt, draw-note(r2_note)) } else { [] },
+  )
+}
+
+#let title-column(cn) = {
+  let cells = cn.clusters().map(c => box(width: 13.2pt, height: 20.4pt, align(top,
+    box(width: 13.2pt, height: 12pt, align(center + horizon, text(9.6pt, font: kai-font, weight: "bold", c)))
+  )))
+  let title_box = rect(
+    stroke: 0.8pt + black,
+    inset: 0pt,
+    outset: (top: 6pt, bottom: -0.4pt, left: 1.5pt, right: 1.5pt),
+    radius: 2pt,
+    stack(dir: ttb, spacing: 2pt, ..cells),
+  )
+  box(width: 24pt, align(left, stack(box(height: 10.4pt), title_box)))
+}
+
+#let render-subscript(subscript) = {
+  let sub_stack = stack(dir: ttb, spacing: 1.2pt, ..subscript.clusters().map(c => {
+    let t = text(7.2pt, font: kai-font, fill: rgb("333"), c)
+    if c in "（）()" { rotate(90deg, t) } else { t }
+  }))
+  box(width: 13.2pt, height: auto, align(center + top, move(dy: 4pt, sub_stack)))
 }
 
 #let vline(cn, py: "", notes: "", subscript: "", bold: false) = {
+  if bold { return title-column(cn) }
+
   let c_arr = cn.clusters()
   let p_arr = if py != "" { py.split(" ") } else { () }
 
@@ -103,36 +119,25 @@
   )
 
   let max_len = calc.max(c_arr.len(), p_arr.len(), n_arr.len())
-
-  let cells = if bold { () } else { (top_row,) }
-  for i in range(max_len) {
-    let c = c_arr.at(i, default: "　")
-    let p = p_arr.at(i, default: " ")
-    let n = n_arr.at(i, default: "")
-    if n in (" ", "　") { n = "" }
-    if c in (" ", "") { c = "　" }
-
-    let is_last_bar = n.contains("|") and not n_arr.at(i + 1, default: "").contains("|")
-    cells.push(char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar, bold: bold))
-  }
+  let cells = (
+    top_row,
+    ..range(max_len).map(i => {
+      let c = c_arr.at(i, default: "　")
+      let p = p_arr.at(i, default: " ")
+      let n = n_arr.at(i, default: "")
+      if n in (" ", "　") { n = "" }
+      if c in (" ", "") { c = "　" }
+      let is_last_bar = n.contains("|") and not n_arr.at(i + 1, default: "").contains("|")
+      char-pinyin-note-vertical(c, p, n, is_last_bar: is_last_bar)
+    }),
+  )
 
   let col = stack(dir: ttb, spacing: 2pt, ..cells)
   if subscript != "" {
-    let sub_stack = stack(dir: ttb, spacing: 1.2pt, ..subscript.clusters().map(c => {
-      let t = text(7.2pt, font: kai-font, fill: rgb("333"), c)
-      if c in "（）()" { rotate(90deg, t) } else { t }
-    }))
-    let sub_box = box(width: 13.2pt, height: auto, align(center + top, move(dy: 4pt, sub_stack)))
-    col = stack(dir: ttb, spacing: 2pt, col, sub_box)
+    col = stack(dir: ttb, spacing: 2pt, col, render-subscript(subscript))
   }
 
-  let content = if bold {
-    stack(box(height: 10.4pt), rect(stroke: 0.8pt + black, inset: 0pt, outset: (top: 6pt, bottom: -0.4pt, left: 1.5pt, right: 1.5pt), radius: 2pt, col))
-  } else {
-    col
-  }
-
-  box(width: 24pt, align(left, content))
+  box(width: 24pt, align(left, col))
 }
 
 #let chant-section(..lines) = box[
