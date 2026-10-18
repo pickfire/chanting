@@ -87,7 +87,18 @@
   // Use split(" ") to allow grouping multiple notes to one character!
   let n_arr = if notes != "" { notes.split(" ") } else { () }
 
-  let top_row = box(width: 13.2pt, height: 8.4pt)[]
+  let top_note = ""
+  if n_arr.at(0, default: "").contains("^") {
+    top_note = n_arr.at(0)
+    n_arr.at(0) = ""
+  }
+
+  let top_row = grid(
+    columns: (13.2pt, auto),
+    rows: (8.4pt,),
+    align: (center + horizon, left + top),
+    box(width: 13.2pt, height: 8.4pt)[], if top_note != "" { draw-note(top_note) } else { [] },
+  )
 
   let max_len = calc.max(c_arr.len(), p_arr.len(), n_arr.len())
 
