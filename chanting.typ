@@ -82,7 +82,7 @@
     radius: 2.5pt,
     stack(dir: ttb, spacing: 0pt, ..cells),
   )
-  box(width: 25pt, align(left, stack(box(height: 10.5pt), title_box)))
+  box(width: 25pt, align(left, stack(box(height: 12.0pt), title_box)))
 }
 
 #let render-subscript(subscript) = {
