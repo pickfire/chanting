@@ -45,11 +45,21 @@
 
 #let char-pinyin-note-vertical(c, p, n, is_last_bar: false) = {
   let n_rest = n.replace("|", "")
-  let top_pad = if n.contains("^") { 0pt } else if n_rest in ("-", "--") { 9.0pt } else { 4.5pt }
+  let top_pad = if n.contains("^") {
+    0pt
+  } else if n_rest in ("-", "--") {
+    9.0pt
+  } else if n_rest in ("o-", "o--") {
+    3.0pt
+  } else {
+    4.5pt
+  }
   let line_len = if is_last_bar { 18.0pt } else { 22.8pt }
 
   let (r1_note, r2_note) = if n_rest == "--" {
     ("-", "-")
+  } else if n_rest == "o--" {
+    ("o-", "-")
   } else if n_rest.contains("_-") {
     (n_rest.replace("_-", ""), "-")
   } else {
