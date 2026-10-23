@@ -67,24 +67,24 @@
   }
 
   grid(
-    columns: (18.5pt, auto),
-    rows: (17.2pt, 6.0pt),
+    columns: (19.0pt, auto),
+    rows: (17.5pt, 6.0pt),
     align: (center + horizon, left + top),
     // Row 1: Character (col 1), Note (col 2)
-    box(width: 18.5pt, height: 17.2pt, {
+    box(width: 19.0pt, height: 17.5pt, {
       if n.contains("|") {
         place(left + top, line(angle: 90deg, length: line_len, stroke: 1.2pt + rgb("999999")))
       }
-      place(center + horizon, text(14.5pt, font: hei-font, weight: "medium", c))
+      place(center + horizon, text(15.0pt, font: hei-font, weight: "medium", c))
     }),
     if r1_note not in ("", " ", "　") { move(dy: top_pad, draw-note(r1_note)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
-    move(dy: -2.5pt, text(5.0pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -0.8pt, draw-note(r2_note)) } else { [] },
+    move(dy: -2.5pt, text(5.0pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -2.9pt, draw-note(r2_note)) } else { [] },
   )
 }
 
 #let title-column(cn) = {
-  let cells = cn.clusters().map(c => box(width: 18.5pt, height: 24.5pt, align(top, box(width: 18.5pt, height: 17.2pt, align(center + horizon, text(14.5pt, font: hei-font, weight: "bold", c))))))
+  let cells = cn.clusters().map(c => box(width: 19.0pt, height: 24.5pt, align(top, box(width: 19.0pt, height: 17.5pt, align(center + horizon, text(15.0pt, font: hei-font, weight: "bold", c))))))
   let title_box = rect(
     stroke: 1.0pt + black,
     inset: 0pt,
@@ -164,7 +164,7 @@
 #align(right)[
   #grid(
     columns: (100%,),
-    rows: (auto, 20pt, auto),
+    rows: (auto, 14pt, auto),
     chant-section(
       vline("", subscript: "问讯、礼佛三拜、问讯"),
       vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^o _ o o o o o o o- o"),
