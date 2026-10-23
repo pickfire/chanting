@@ -9,31 +9,31 @@
 #let blue-note = rgb("1E88E5")  // 木鱼 (wooden fish)
 #let red-note = rgb("E53935")   // 引磬 (yinqing)
 
-#let draw-single-note(n) = box(width: 6pt, height: 6pt, align(center + horizon, {
+#let draw-single-note(n) = box(width: 6.5pt, height: 6.5pt, align(center + horizon, {
   if n in ("o", "O", "○", "。") {
-    place(center + horizon, circle(radius: 1.2pt, stroke: 0.7pt + blue-note))
+    place(center + horizon, circle(radius: 1.3pt, stroke: 0.75pt + blue-note))
   } else if n in ("◎", "@") {
-    box(width: 5pt, height: 5pt, {
-      place(center + horizon, circle(radius: 2.0pt, stroke: 0.7pt + blue-note))
-      place(center + horizon, circle(radius: 0.5pt, fill: blue-note))
+    box(width: 5.5pt, height: 5.5pt, {
+      place(center + horizon, circle(radius: 2.2pt, stroke: 0.75pt + blue-note))
+      place(center + horizon, circle(radius: 0.55pt, fill: blue-note))
     })
   } else if n in ("△", "^") {
     place(center + top, polygon(
       fill: none,
-      stroke: (paint: red-note, thickness: 0.7pt, miter-limit: 10.0),
+      stroke: (paint: red-note, thickness: 0.75pt, miter-limit: 10.0),
       (0pt, 0pt),
-      (5pt, 0pt),
-      (5pt, 3.09pt),
+      (5.5pt, 0pt),
+      (5.5pt, 3.4pt),
     ))
   } else if n in ("⊥", "T") {
-    box(width: 5pt, height: 5pt, {
-      place(line(start: (2.5pt, 0pt), end: (2.5pt, 5pt), stroke: 0.7pt + red-note))
-      place(line(start: (0pt, 5pt), end: (5pt, 5pt), stroke: 0.7pt + red-note))
+    box(width: 5.5pt, height: 5.5pt, {
+      place(line(start: (2.75pt, 0pt), end: (2.75pt, 5.5pt), stroke: 0.75pt + red-note))
+      place(line(start: (0pt, 5.5pt), end: (5.5pt, 5.5pt), stroke: 0.75pt + red-note))
     })
   } else if n == "-" {
-    place(center + horizon, line(length: 4pt, stroke: 0.7pt + red-note))
+    place(center + horizon, line(length: 4.5pt, stroke: 0.75pt + red-note))
   } else if n not in ("_", " ", "") {
-    text(9.5pt, fill: red-note, weight: "bold", n)
+    text(10pt, fill: red-note, weight: "bold", n)
   }
 }))
 
@@ -48,13 +48,13 @@
   let top_pad = if n.contains("^") {
     0pt
   } else if n_rest in ("-", "--") {
-    9.0pt
+    9.5pt
   } else if n_rest in ("o-", "o--") {
-    3.0pt
+    3.5pt
   } else {
-    4.5pt
+    5.0pt
   }
-  let line_len = if is_last_bar { 18.0pt } else { 22.8pt }
+  let line_len = if is_last_bar { 19.5pt } else { 24.5pt }
 
   let (r1_note, r2_note) = if n_rest == "--" {
     ("-", "-")
@@ -67,24 +67,24 @@
   }
 
   grid(
-    columns: (17pt, auto),
-    rows: (15.5pt, 5.8pt),
+    columns: (18.5pt, auto),
+    rows: (17.2pt, 6.0pt),
     align: (center + horizon, left + top),
     // Row 1: Character (col 1), Note (col 2)
-    box(width: 17pt, height: 15.5pt, {
+    box(width: 18.5pt, height: 17.2pt, {
       if n.contains("|") {
         place(left + top, line(angle: 90deg, length: line_len, stroke: 1.2pt + rgb("999999")))
       }
-      place(center + horizon, text(13pt, font: hei-font, weight: "medium", c))
+      place(center + horizon, text(14.5pt, font: hei-font, weight: "medium", c))
     }),
     if r1_note not in ("", " ", "　") { move(dy: top_pad, draw-note(r1_note)) } else { [] },
     // Row 2: Pinyin (col 1), empty (col 2)
-    move(dy: -2.5pt, text(4.5pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -0.8pt, draw-note(r2_note)) } else { [] },
+    move(dy: -2.5pt, text(5.0pt, fill: rgb("666"), p)), if r2_note != "" { move(dy: -0.8pt, draw-note(r2_note)) } else { [] },
   )
 }
 
 #let title-column(cn) = {
-  let cells = cn.clusters().map(c => box(width: 17pt, height: 22.8pt, align(top, box(width: 17pt, height: 15.5pt, align(center + horizon, text(13pt, font: hei-font, weight: "bold", c))))))
+  let cells = cn.clusters().map(c => box(width: 18.5pt, height: 24.5pt, align(top, box(width: 18.5pt, height: 17.2pt, align(center + horizon, text(14.5pt, font: hei-font, weight: "bold", c))))))
   let title_box = rect(
     stroke: 1.0pt + black,
     inset: 0pt,
@@ -92,15 +92,15 @@
     radius: 2.5pt,
     stack(dir: ttb, spacing: 0pt, ..cells),
   )
-  box(width: 25pt, align(left, stack(box(height: 12.0pt), title_box)))
+  box(width: 25.5pt, align(left, stack(box(height: 12.0pt), title_box)))
 }
 
 #let render-subscript(subscript) = {
   let chars = subscript
     .clusters()
     .map(c => {
-      let h = if c == "、" { 6.0pt } else { 9.2pt }
-      box(width: 13pt, height: h, align(center + horizon, text(7.8pt, font: hei-font, weight: "medium", fill: red-note, c)))
+      let h = if c == "、" { 6.5pt } else { 10.0pt }
+      box(width: 14.0pt, height: h, align(center + horizon, text(8.5pt, font: hei-font, weight: "medium", fill: red-note, c)))
     })
   let sub_box = rect(
     stroke: 0.6pt + red-note,
@@ -108,7 +108,7 @@
     inset: (x: 1pt, y: 2.2pt),
     stack(dir: ttb, spacing: 1.2pt, ..chars),
   )
-  box(width: 17pt, height: auto, align(center + top, move(dy: 3.5pt, sub_box)))
+  box(width: 18.5pt, height: auto, align(center + top, move(dy: 3.5pt, sub_box)))
 }
 
 #let vline(cn, py: "", notes: "", subscript: "", bold: false) = {
@@ -127,8 +127,8 @@
   }
 
   let top_row = grid(
-    columns: (17pt, auto),
-    rows: (10.5pt,),
+    columns: (18.5pt, auto),
+    rows: (11.0pt,),
     align: (center + horizon, left + top),
     [], if top_note != "" { draw-note(top_note) },
   )
@@ -147,24 +147,24 @@
     }),
   )
 
-  let col = stack(dir: ttb, spacing: 1.5pt, ..cells)
+  let col = stack(dir: ttb, spacing: 1.0pt, ..cells)
   if subscript != "" {
     col = stack(dir: ttb, spacing: 2.5pt, col, render-subscript(subscript))
   }
 
-  box(width: 25pt, align(left, col))
+  box(width: 25.5pt, align(left, col))
 }
 
 #let chant-section(..lines) = box[
   #set align(top + right)
-  #stack(dir: rtl, spacing: 4.8pt, ..lines)
+  #stack(dir: rtl, spacing: 4.2pt, ..lines)
 ]
 
 // --- FULL PAGE LAYOUT ---
 #align(right)[
   #grid(
     columns: (100%,),
-    rows: (auto, 1fr, auto),
+    rows: (auto, 20pt, auto),
     chant-section(
       vline("", subscript: "问讯、礼佛三拜、问讯"),
       vline("南无本师释迦牟尼佛", py: "ná mó běn shī shì jiā móu ní fó", notes: "^o _ o o o o o o o- o"),
