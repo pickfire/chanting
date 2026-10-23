@@ -6,6 +6,10 @@
 
 #let hei-font = ("Noto Sans CJK SC", "Source Han Sans", "MiSans")
 #set text(font: hei-font)
+// Notes:
+// - `o` (blue): 木鱼 (wooden fish)
+// - `-` (red): 引磬 (yinqing)
+// - `o-`: both
 #let blue-note = rgb("1E88E5")
 #let red-note = rgb("E53935")
 
